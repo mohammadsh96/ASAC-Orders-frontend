@@ -1,4 +1,4 @@
-/* home.css */
+
 
 .home-container {
     text-align: center;
@@ -64,22 +64,7 @@
   }
   
   
- /* home.css */
-
- /* @keyframes colorAnimation {
-    0% { background-color: #fccb90; }
-    15% { background-color: #ee7724; }
-    25% { background-color: #d8363a; }
-    50% { background-color: #dd3675; }
-    70% { background-color: #b44593; }
-    85% { background-color: #f5e3e6; }
-    100% { background-color: #d0d8d6; }
-  }
-  
-  body {
-    animation: colorAnimation 3s infinite alternate;
-  }
-   */
+ 
   
   
   

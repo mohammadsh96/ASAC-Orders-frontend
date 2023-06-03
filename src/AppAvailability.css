@@ -1,7 +1,7 @@
 .closed-container {
     text-align: center;
     margin: 50px;
-    background-image: url('close.jpg'); /* Replace 'your-image-path.jpg' with the path to your image */
+    background-image: url('close.jpg'); 
     background-size: cover;
     background-position: center;
     height: 600px;
@@ -32,14 +32,14 @@
   }
   
   .current-time span {
-    font-family: 'Your Font', sans-serif; /* Replace 'Your Font' with the desired font name */
+    font-family: 'Your Font', sans-serif; 
     font-size: 16px;
-    color: #cc0101; /* Replace with your desired color */
+    color: #cc0101; 
   }
   
   .time-remaining span {
-    font-family: 'Your Font', sans-serif; /* Replace 'Your Font' with the desired font name */
+    font-family: 'Your Font', sans-serif; 
     font-size: 16px;
-    color: #f10606; /* Replace with your desired color */
+    color: #f10606;
   }
   
