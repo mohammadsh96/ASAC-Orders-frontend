@@ -139,24 +139,51 @@ const Orders = () => {
     }
   };
 
-  // Calculate total price for all orders
-  let totalOrderPrice, totalUnpaidPrice, totalPaidPrice, totalNumOrders = 0;
-  if (orders.length) {
-    totalOrderPrice = orders.reduce((total, order) => total + parseFloat(order.price), 0);
+ // Calculate total price for all orders
+let totalOrderPrice, totalUnpaidPrice, totalPaidPrice, totalNumOrders, unitPrice, remainingPrice = 0;
+if (orders.length) {
+  totalOrderPrice = orders.reduce((total, order) => total + parseFloat(order.price), 0);
 
-    // Calculate total unpaid price
-    totalUnpaidPrice = orders
-      .filter((order) => order.paymentStatus !== 'Paid')
-      .reduce((total, order) => total + parseFloat(order.price), 0);
+  // Calculate total unpaid price
+  totalUnpaidPrice = orders
+    .filter((order) => order.paymentStatus !== 'Paid')
+    .reduce((total, order) => total + parseFloat(order.price), 0);
 
-    // Calculate total paid price
-    totalPaidPrice = orders
-      .filter((order) => order.paymentStatus === 'Paid')
-      .reduce((total, order) => total + parseFloat(order.price), 0);
+  // Calculate total paid price
+  totalPaidPrice = orders
+    .filter((order) => order.paymentStatus === 'Paid')
+    .reduce((total, order) => total + parseFloat(order.price), 0);
 
-    // Calculate total number of orders
-    totalNumOrders = orders.length;
+  // Calculate total number of orders
+  totalNumOrders = orders.length;
+
+  // Calculate unit price for dividing among orders
+  const incrementValues = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50];
+  
+  let incrementIndex = (2 / totalNumOrders) 
+
+  
+  for (let i = 0; i < incrementValues.length; i++) {
+
+      if(incrementIndex >= incrementValues[i] && incrementIndex < incrementValues[i+1] ){
+
+        incrementIndex =incrementValues[i]
+      }
+    
+    
   }
+  console.log(incrementIndex); //   2/9 = 0.222 >>>0.20
+
+  // const closestIncrement = incrementValues[incrementIndex];
+  const remainingUnits = 2 - (incrementIndex * totalNumOrders);
+
+  // unitPrice = remainingUnits / totalNumOrders;
+  // remainingPrice = (remainingUnits * totalOrderPrice) / totalNumOrders;
+
+  // const getOrderPriceWithUnitPrice = (order) => {
+  //   const orderPrice = parseFloat(order.price);
+  //   return (orderPrice + unitPrice + closestIncrement).toFixed(2);
+  // };
 
   return (
     <div className="orders-container">
@@ -183,7 +210,7 @@ const Orders = () => {
                 <td>{order.name}</td>
                 <td>{order.food}</td>
                 <td>{order.quantity}</td>
-                <td>{order.price}</td>
+                <td>{order.price + incrementIndex}</td>
                 <td className={order.paymentStatus === 'Paid' ? 'paid' : 'unpaid'}>
                   {order.paymentStatus}
                 </td>
@@ -239,11 +266,20 @@ const Orders = () => {
                 {totalNumOrders}
               </td>
             </tr>
+            <tr>
+  <td colSpan="4" className="total-label">
+    Delivery Calculation:
+  </td>
+  <td colSpan="3" className="total-value">
+    {incrementIndex} JD for each order + Remaining for Delivery man: {remainingUnits.toFixed(2)} JD
+  </td>
+</tr>
+
           </tbody>
         </table>
       )}
     </div>
   );
 };
-
+}
 export default Orders;

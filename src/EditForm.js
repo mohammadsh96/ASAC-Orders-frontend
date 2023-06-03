@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useParams, useNavigate } from 'react-router-dom';
+import { menu } from './menu';
 import './editForm.css';
 
 const EditForm = () => {
@@ -35,7 +36,9 @@ const EditForm = () => {
       [event.target.name]: event.target.value,
     });
   };
-
+if(!show){
+    navigate('/')
+}
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -77,16 +80,27 @@ const EditForm = () => {
                 onChange={handleInputChange}
               /> */}
             </div>
-            <div className="form-group">
-              <label htmlFor="food">Food:</label>
-              <input
-                type="text"
-                id="food"
-                name="food"
-                value={formData.food || ''}
-                onChange={handleInputChange}
-              />
-            </div>
+           
+
+
+
+<div className="form-group">
+  <label htmlFor="food">Food:</label>
+  <select
+    id="food"
+    name="food"
+    value={formData.food || ''}
+    onChange={handleInputChange}
+  >
+    <option value="">Select Food</option>
+    {menu.map((item) => (
+      <option key={item.name} value={item.name}>
+        {item.name}
+      </option>
+    ))}
+  </select>
+</div>
+
             <div className="form-group">
               <label htmlFor="quantity">Quantity:</label>
               <input
