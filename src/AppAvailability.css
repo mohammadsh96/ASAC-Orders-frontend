@@ -1,0 +1,45 @@
+.closed-container {
+    text-align: center;
+    margin: 50px;
+    background-image: url('close.jpg'); /* Replace 'your-image-path.jpg' with the path to your image */
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    
+  }
+  .closed-container-inner{
+    background-color: aliceblue;
+    height: 200px;
+    opacity: 0.8;
+  }
+  .closed-heading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .closed-text {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .closed-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .current-time span {
+    font-family: 'Your Font', sans-serif; /* Replace 'Your Font' with the desired font name */
+    font-size: 16px;
+    color: #cc0101; /* Replace with your desired color */
+  }
+  
+  .time-remaining span {
+    font-family: 'Your Font', sans-serif; /* Replace 'Your Font' with the desired font name */
+    font-size: 16px;
+    color: #f10606; /* Replace with your desired color */
+  }
+  

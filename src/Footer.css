@@ -1,0 +1,59 @@
+.footer-text {
+    /* Your general text styles */
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .name {
+    /* Styles for the name paragraph */
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+  }
+.footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .footer-text {
+    margin: 5px;
+  }
+  
+  .contact-info {
+    margin-top: 10px;
+  }
+  
+  .social-links {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .social-link {
+    margin: 0 10px;
+    color: #0366d6;
+    text-decoration: none;
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 10px;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .footer-content {
+      flex-direction: column;
+    }
+  }
+  

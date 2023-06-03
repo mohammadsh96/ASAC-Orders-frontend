@@ -1,0 +1,72 @@
+.signin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fccb90;
+    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  }
+  
+  .signin-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signin-image {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  .signin-image img {
+    width: 185px;
+  }
+  
+  .input-field {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .signin-button {
+    padding: 10px 20px;
+    background-color: #ee7724;
+    background-image: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .text-muted {
+    color: #888;
+  }
+  
+  .nav-link-button {
+    padding: 10px 20px;
+    background-color: #ee7724;
+    background-image: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .nav-link-button:hover {
+    text-decoration: underline;
+  }
+  

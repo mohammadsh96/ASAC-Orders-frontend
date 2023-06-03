@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Signup from './Signup';
+import Signin from './Signin';
+import Dashboard from './Dashboard';
+import PlaceOrder from './PlaceOrder';
+import Home from './Home';
+import NavBar from './Nav';
+import EditForm from './EditForm';
+import AboutUs from './aboutUs';
+import Footer from './Footer';
+import AppAvailability from './AppAvailability ';
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    
+    <Router>
+    <NavBar/>
+    {/* <AppAvailability> */}
+      <Routes>
+
+      <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/place-order" element={<PlaceOrder />} />
+        <Route path="/orders/:id/edit" element={<EditForm />} />
+        <Route path="/about" element={<AboutUs />} />
+
+       
+      </Routes>
+      {/* </AppAvailability> */}
+    <Footer/>
+    </Router>
+    </>
   );
-}
+};
 
 export default App;
