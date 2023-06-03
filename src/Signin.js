@@ -61,10 +61,9 @@ const Signin = () => {
       <form className="gradient-form signin-form" onSubmit={handleSignin}>
         <div className="d-flex flex-column ms-5">
           <div className="text-center">
-            <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" style={{ width: '185px' }} alt="logo" />
-            <h4 className="mt-1 mb-5 pb-1">We are The ASAC Irbid Team</h4>
+            <h4 className="mt-1 mb-5 pb-1">Welcomt to ASAC Irbid Team </h4>
           </div>
-          <p>Please login to your account</p>
+          <p> login to your account</p>
           <div className="mb-4">
             <input
               className="input-field"
@@ -85,14 +84,16 @@ const Signin = () => {
           </div>
           <div className="text-center pt-1 mb-5 pb-1">
             <button className="mb-4 w-100 gradient-custom-2 signin-button" type="submit">Sign in</button>
-            <a className="text-muted" href="#!">Forgot password?</a>
+            {/* <a className="text-muted" href="#!">Forgot password?</a> */}
           </div>
           <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
             <p className="mb-0">Don't have an account?</p>
             <button className="mx-2 nav-link-button" onClick={() => navigate('/signup')} type="button">
               Sign Up
             </button>
+
           </div>
+            <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" style={{ width: '185px' }} alt="logo" />
         </div>
         
       </form>

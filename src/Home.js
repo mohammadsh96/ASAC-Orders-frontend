@@ -53,7 +53,7 @@ const Home = () => {
       <h2 className="home-heading">ASAC Irbid Team Orders</h2>
       <nav>
         <ul className="nav-links">
-          {cookies.token === '' && (
+          {(cookies.token === '' || cookies.token === undefined )&& (
             <li>
               <button className="nav-link-button">
                 <Link to="/signin">Signin</Link>
@@ -61,7 +61,7 @@ const Home = () => {
             </li>
           )}
 
-          {cookies.token !== '' && (
+          {cookies.token !== '' && cookies.token !== undefined &&(
             <>
               <li>
                 <button className="nav-link-button">
@@ -76,7 +76,7 @@ const Home = () => {
             </>
           )}
         </ul>
-        {cookies.token !== '' && (
+        {cookies.token !== '' && cookies.token !== undefined &&(
           <button className="signout-button" onClick={handleSignout}>
             Sign Out
           </button>

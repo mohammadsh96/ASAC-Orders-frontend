@@ -4,7 +4,6 @@ import { useCookies } from 'react-cookie';
 import './Orders.css';
 import Swal from 'sweetalert2';
 
-
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,7 +40,7 @@ const Orders = () => {
           Authorization: `Bearer ${cookies.token}`,
         },
       });
-  
+
       if (response.ok) {
         const updatedOrders = orders.filter((order) => order._id !== orderId);
         setOrders(updatedOrders);
@@ -82,23 +81,21 @@ const Orders = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookies.token}`,
         },
-      })
-      if(response.ok){
+      });
+
+      if (response.ok) {
         Swal.fire({
           icon: 'success',
           title: 'Order payment Approved',
           text: 'successfully!',
         });
         fetchOrders();
-      }else{
+      } else {
         Swal.fire({
           icon: 'error',
           title: 'not Allowed bro',
-          
         });
       }
-        
-     
     } catch (error) {
       console.log(error);
     } finally {
@@ -118,7 +115,7 @@ const Orders = () => {
           Authorization: `Bearer ${cookies.token}`,
         },
       });
-  
+
       if (response.ok) {
         Swal.fire({
           icon: 'success',
@@ -143,23 +140,22 @@ const Orders = () => {
   };
 
   // Calculate total price for all orders
-  let totalOrderPrice, totalUnpaidPrice,totalPaidPrice,totalNumOrders =0;
-  if(orders.length){
-     totalOrderPrice = orders.reduce((total, order) => total + parseFloat(order.price), 0);
-  
+  let totalOrderPrice, totalUnpaidPrice, totalPaidPrice, totalNumOrders = 0;
+  if (orders.length) {
+    totalOrderPrice = orders.reduce((total, order) => total + parseFloat(order.price), 0);
+
     // Calculate total unpaid price
-     totalUnpaidPrice = orders
+    totalUnpaidPrice = orders
       .filter((order) => order.paymentStatus !== 'Paid')
       .reduce((total, order) => total + parseFloat(order.price), 0);
-  
+
     // Calculate total paid price
-     totalPaidPrice = orders
+    totalPaidPrice = orders
       .filter((order) => order.paymentStatus === 'Paid')
       .reduce((total, order) => total + parseFloat(order.price), 0);
-  
+
     // Calculate total number of orders
-     totalNumOrders = orders.length;
-    
+    totalNumOrders = orders.length;
   }
 
   return (
@@ -177,7 +173,7 @@ const Orders = () => {
               <th>Quantity</th>
               <th>Price</th>
               <th>Payment Status</th>
-              <th>Payment Recived</th>
+              <th>Payment Received</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -199,10 +195,11 @@ const Orders = () => {
                   )}
                 </td>
                 <td>
-                  {order.userId === cookies.user._id && (
+                  {cookies.user && order.userId === cookies.user._id && (
                     <>
-                    {cookies.user.email ==='mhmd.shrydh1996@gmail.com' &&  <button onClick={() => handleViewOrder(order._id)}>View</button>}
-                     
+                      {cookies.user.email === 'mhmd.shrydh1996@gmail.com' && (
+                        <button onClick={() => handleViewOrder(order._id)}>View</button>
+                      )}
                       <button onClick={() => handleEdit(order._id)}>Edit/Pay</button>
                       <button onClick={() => handleDelete(order._id)}>Delete</button>
                     </>

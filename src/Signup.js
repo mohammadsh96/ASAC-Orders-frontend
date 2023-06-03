@@ -35,7 +35,7 @@ const Signup = () => {
     <div className="signup-container">
       <div className="signup-content">
         <div className="signup-form">
-          <h2 className="signup-heading">Sign Up</h2>
+          <h4 className="signup-heading">Join ASAC Irbid Team</h4>
           <form onSubmit={handleSignup}>
             <div className="form-group">
               <label htmlFor="name">Name</label>

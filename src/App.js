@@ -9,13 +9,15 @@ import NavBar from './Nav';
 import EditForm from './EditForm';
 import AboutUs from './aboutUs';
 import Footer from './Footer';
-import AppAvailability from './AppAvailability ';
+// import AppAvailability from './AppAvailability ';
+
 const App = () => {
   return (
     <>
     
     <Router>
     <NavBar/>
+    
     {/* <AppAvailability> */}
       <Routes>
 
