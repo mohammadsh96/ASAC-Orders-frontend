@@ -30,3 +30,21 @@ nav {
     color: #ee7724;
   }
   
+  
+  @media only screen and (max-width: 600px) {
+    nav {
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 10px;
+    }
+  
+    .nav-links1 {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .nav-links1 li {
+      font-size: 16px;
+    }
+  }
+  
