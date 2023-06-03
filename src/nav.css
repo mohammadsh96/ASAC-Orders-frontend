@@ -15,15 +15,19 @@ nav {
     list-style: none;
     display: flex;
     gap: 20px;
-  }
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
   
   .nav-links1 li {
     font-size: 18px;
+    width: fit-content;
+    padding: 2px;
   }
   
   .nav-links1 a {
     text-decoration: none;
     color: #333;
+    box-shadow: 2px 2px  2px rgb(250, 114, 155);
   }
   
   .nav-links1 a:hover {

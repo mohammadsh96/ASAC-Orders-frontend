@@ -69,9 +69,10 @@ const Home = () => {
                 </button>
               </li>
               <li>
-                <button className="nav-link-button" onClick={handleClearAllOrders}>
+              {cookies.user.email === 'mhmd.shrydh1996@gmail.com' &&(<button className="nav-link-button" onClick={handleClearAllOrders}>
                   Clear All Orders
-                </button>
+                </button>)}
+                
               </li>
             </>
           )}

@@ -44,7 +44,7 @@
   }
   
   .signout-button {
-    padding: 10px 20px;
+    padding: 5px 10px;
     background-color: #ee7724;
     background-image: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
     color: white;
@@ -71,11 +71,12 @@
         font-size: 5px;
     }
     
-    .home-container button {
+    .home-container nav ul li button {
         font-size: 8px;
         width: fit-content;
         padding: 4px;
     }
+    
     
     .nav-links li {
       margin: 5px;

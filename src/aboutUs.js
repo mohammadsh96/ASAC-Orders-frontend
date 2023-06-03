@@ -60,7 +60,6 @@ const AboutUs = () => {
           <li>Bootcamp</li>
         </ul>
         </div>
-        <div  className='image-divs1'> <img src='https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg' alt='ASAC'></img></div>
         </div>
       </div>
     </div>

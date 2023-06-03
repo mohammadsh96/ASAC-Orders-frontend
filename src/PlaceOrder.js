@@ -73,6 +73,7 @@ const PlaceOrder = () => {
         className="food-select"
         value={food}
         onChange={handleFoodChange}
+        required
       >
         <option value="">Select Food</option>
         {menu.map((item) => (

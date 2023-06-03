@@ -208,7 +208,7 @@ if (orders.length) {
             {orders.map((order) => (
               <tr key={order._id} className={order.approved ? 'approved' : 'unapproved'}>
                 <td>{order.name}</td>
-                <td>{order.food}</td>
+                <td id='food-name'>{order.food}</td>
                 <td>{order.quantity}</td>
                 <td>{order.price + incrementIndex}</td>
                 <td className={order.paymentStatus === 'Paid' ? 'paid' : 'unpaid'}>
@@ -239,7 +239,7 @@ if (orders.length) {
                 Total Order Price:
               </td>
               <td colSpan="3" className="total-value">
-                {totalOrderPrice}
+                {totalOrderPrice} JD
               </td>
             </tr>
             <tr>
@@ -247,7 +247,7 @@ if (orders.length) {
                 Total Unpaid Price:
               </td>
               <td colSpan="3" className="total-value">
-                {totalUnpaidPrice}
+                {totalUnpaidPrice} JD
               </td>
             </tr>
             <tr>
@@ -255,7 +255,7 @@ if (orders.length) {
                 Total Paid Price:
               </td>
               <td colSpan="3" className="total-value">
-                {totalPaidPrice}
+                {totalPaidPrice} JD
               </td>
             </tr>
             <tr>
@@ -271,7 +271,11 @@ if (orders.length) {
     Delivery Calculation:
   </td>
   <td colSpan="3" className="total-value">
-    {incrementIndex} JD for each order + Remaining for Delivery man: {remainingUnits.toFixed(2)} JD
+    {incrementIndex} JD for each order + Remaining for Delivery man:{remainingUnits.toFixed(2) === '0.05' ? <span> شلن </span> :
+    <>
+    {remainingUnits.toFixed(2) === '0.10' ? <span> بريزه </span>: <span>{remainingUnits.toFixed(2)} JD</span>} 
+    
+    </>} 
   </td>
 </tr>
 
