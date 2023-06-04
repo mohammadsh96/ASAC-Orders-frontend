@@ -40,6 +40,7 @@ export const menu = [
     { name: 'ساندويش زنجر عادي+سيزر', price: '3.50' },
     { name: 'تبوله', price: '1.25' },
     { name: 'فتوش', price: '1.25' },
+    { name: 'مايتي زنجر', price: '2.75' },
     { name: 'علبة بطاطا', price: '0.75' },
     { name: "I am Good", price: '0.00' },
   
