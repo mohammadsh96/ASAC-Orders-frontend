@@ -158,15 +158,20 @@ if (orders.length) {
   totalNumOrders = orders.length;
 
   // Calculate unit price for dividing among orders
-  const incrementValues = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00, 2.00];
+  const incrementValues = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00, 2.00,2.00,2.00];
   
   let incrementIndex = (2 / totalNumOrders) 
 
   for (let i = 0; i < incrementValues.length; i++) {
 
       if(incrementIndex >= incrementValues[i] && incrementIndex < incrementValues[i+1] ){
+if(incrementIndex === incrementValues[i] ){
 
-        incrementIndex =incrementValues[i+1]
+  incrementIndex =incrementValues[i]
+}else{
+  incrementIndex =incrementValues[i+1]
+
+}
         break;
       }
     
@@ -273,7 +278,7 @@ if (orders.length) {
   <td colSpan="3" className="total-value">
     {incrementIndex} JD for each order + Remaining balance :{remainingUnits.toFixed(2) === '-0.05' ? <span> شلن </span> :
     <>
-    {remainingUnits.toFixed(2) === '-0.10' ? <span> بريزه </span>: <span>{remainingUnits.toFixed(2)} JD</span>} 
+    {remainingUnits.toFixed(2) === '-0.10' ? <span> بريزه </span>: <span>{remainingUnits.toFixed(2)*-1} JD</span>} 
     
     </>} 
   </td>
