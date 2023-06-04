@@ -9,7 +9,7 @@ import NavBar from './Nav';
 import EditForm from './EditForm';
 import AboutUs from './aboutUs';
 import Footer from './Footer';
-// import AppAvailability from './AppAvailability ';
+import AppAvailability from './AppAvailability ';
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
     <Router>
     <NavBar/>
     
-    {/* <AppAvailability> */}
+    <AppAvailability>
       <Routes>
 
       <Route path="/" element={<Home />} />
@@ -31,7 +31,7 @@ const App = () => {
 
        
       </Routes>
-      {/* </AppAvailability> */}
+      </AppAvailability>
     <Footer/>
     </Router>
     </>
