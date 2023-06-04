@@ -37,6 +37,7 @@ export const menu = [
     { name: 'فتة لحمه', price: '3.00' },
     { name: 'فتة دجاج', price: '2.25' },
     { name: 'سيزر', price: '1.50' },
+    { name: 'ساندويش زنجر عادي+سيزر', price: '3.50' },
     { name: 'تبوله', price: '1.25' },
     { name: 'فتوش', price: '1.25' },
     { name: 'علبة بطاطا', price: '0.75' }

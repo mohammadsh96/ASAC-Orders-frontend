@@ -18,6 +18,7 @@ const PlaceOrder = () => {
     e.preventDefault();
   
     try {
+      
       const totalPrice = price * quantity; // Calculate the total price based on quantity
   
       const response = await fetch('https://asac-orders-system.onrender.com/orders', {
