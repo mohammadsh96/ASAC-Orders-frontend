@@ -76,4 +76,29 @@
   .text-muted {
     color: #888;
   }
+ 
+  
+  .food-select option {
+   
+    background-color: #f2f2f2;
+    color: #000000;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+    
+
+  }
+  
+  .food-select option:hover {
+  
+    background-color: #f38ed3;
+    color: #000000;
+  }
+  
+  .food-select option:selected {
+
+    background-color: #d6f1c9;
+    color: #000000;
+  }
   

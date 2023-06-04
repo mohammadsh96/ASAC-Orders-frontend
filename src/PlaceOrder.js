@@ -67,39 +67,42 @@ const PlaceOrder = () => {
   return (
     <div class="place-order-container">
   <form className="form" onSubmit={handlePlaceOrder}>
-  <h2 class="form-heading">Place Order</h2>
-  <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" alt="ASAC Logo" class="form-image" />
-      <select
-        className="food-select"
-        value={food}
-        onChange={handleFoodChange}
-        required
-      >
-        <option value="">Select Food</option>
-        {menu.map((item) => (
-          <option key={item.name} value={item.name}>
-            {item.name}
-          </option>
-        ))}
-      </select>
-      <input
-        className="input"
-        type="number"
-        placeholder="Quantity"
-        value={quantity}
-        onChange={(e) => setQuantity(parseInt(e.target.value))}
-      />
-      <input
-        className="input"
-        type="number"
-        placeholder="Price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        disabled
-      />
-      <button className="button" type="submit">Submit</button>
-    </form>
+    <h2 class="form-heading">Place Order</h2>
+    <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" alt="ASAC Logo" class="form-image" />
+    <p>Not powered by Shawarma Arab</p>
+    <select
+      className="food-select"
+      value={food}
+      onChange={handleFoodChange}
+      required
+    >
+      <option value="">Select Food</option>
+      {menu.map((item) => (
+        <option key={item.name} value={item.name}>
+          {item.name}
+        </option>
+      ))}
+    </select>
+    <input
+      className="input"
+      type="number"
+      placeholder="Quantity"
+      value={quantity}
+      onChange={(e) => setQuantity(parseInt(e.target.value))}
+    />
+    <input
+      className="input"
+      type="number"
+      placeholder="Price"
+      value={price}
+      onChange={(e) => setPrice(e.target.value)}
+      disabled
+    />
+    <button className="button" type="submit">Submit</button>
+  </form>
 </div>
+
+  
 
   
   );
