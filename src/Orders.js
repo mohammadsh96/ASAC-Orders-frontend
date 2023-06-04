@@ -162,12 +162,12 @@ if (orders.length) {
   
   let incrementIndex = (2 / totalNumOrders) 
 
-  
   for (let i = 0; i < incrementValues.length; i++) {
 
       if(incrementIndex >= incrementValues[i] && incrementIndex < incrementValues[i+1] ){
 
-        incrementIndex =incrementValues[i]
+        incrementIndex =incrementValues[i+1]
+        break;
       }
     
     
@@ -271,9 +271,9 @@ if (orders.length) {
     Delivery Calculation:
   </td>
   <td colSpan="3" className="total-value">
-    {incrementIndex} JD for each order + Remaining for Delivery man:{remainingUnits.toFixed(2) === '0.05' ? <span> شلن </span> :
+    {incrementIndex} JD for each order + Remaining balance :{remainingUnits.toFixed(2) === '-0.05' ? <span> شلن </span> :
     <>
-    {remainingUnits.toFixed(2) === '0.10' ? <span> بريزه </span>: <span>{remainingUnits.toFixed(2)} JD</span>} 
+    {remainingUnits.toFixed(2) === '-0.10' ? <span> بريزه </span>: <span>{remainingUnits.toFixed(2)} JD</span>} 
     
     </>} 
   </td>
