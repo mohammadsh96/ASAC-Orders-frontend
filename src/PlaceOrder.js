@@ -18,7 +18,7 @@ const PlaceOrder = () => {
     e.preventDefault();
   
     try {
-      
+
       const totalPrice = price * quantity; // Calculate the total price based on quantity
   
       const response = await fetch('https://asac-orders-system.onrender.com/orders', {
@@ -84,21 +84,29 @@ const PlaceOrder = () => {
         </option>
       ))}
     </select>
-    <input
-      className="input"
-      type="number"
-      placeholder="Quantity"
-      value={quantity}
-      onChange={(e) => setQuantity(parseInt(e.target.value))}
-    />
-    <input
-      className="input"
-      type="number"
-      placeholder="Price"
-      value={price}
-      onChange={(e) => setPrice(e.target.value)}
-      disabled
-    />
+    <label>
+  Quantity:
+  <input
+    className="input"
+    type="number"
+    placeholder="Quantity"
+    value={quantity}
+    onChange={(e) => setQuantity(parseInt(e.target.value))}
+  />
+</label>
+
+<label>
+  Price:
+  <input
+    className="input"
+    type="number"
+    placeholder="Price"
+    value={price}
+    onChange={(e) => setPrice(e.target.value)}
+    disabled
+  />
+</label>
+
     <button className="button" type="submit">Submit</button>
   </form>
 </div>

@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const [orders2, setOrders2] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -24,6 +25,9 @@ const Orders = () => {
       });
       const data = await response.json();
       setOrders(data);
+      const filteredOrders = data.filter((item) => item.food !== "I am Good");
+      setOrders2(filteredOrders);
+      
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -155,8 +159,7 @@ if (orders.length) {
     .reduce((total, order) => total + parseFloat(order.price), 0);
 
   // Calculate total number of orders
-  totalNumOrders = orders.length;
-
+  totalNumOrders = orders2.length;
   // Calculate unit price for dividing among orders
   const incrementValues = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00, 2.00,2.00,2.00];
   
@@ -177,7 +180,6 @@ if(incrementIndex === incrementValues[i] ){
     
     
   }
-  console.log(incrementIndex); //   2/9 = 0.222 >>>0.20
 
   // const closestIncrement = incrementValues[incrementIndex];
   const remainingUnits = 2 - (incrementIndex * totalNumOrders);
@@ -215,7 +217,8 @@ if(incrementIndex === incrementValues[i] ){
                 <td>{order.name}</td>
                 <td id='food-name'>{order.food}</td>
                 <td>{order.quantity}</td>
-                <td>{order.price + incrementIndex}</td>
+                {order.food==="I am Good" ? <td>{order.price}</td> : <td>{order.price + incrementIndex}</td>}
+                
                 <td className={order.paymentStatus === 'Paid' ? 'paid' : 'unpaid'}>
                   {order.paymentStatus}
                 </td>
@@ -244,7 +247,7 @@ if(incrementIndex === incrementValues[i] ){
                 Total Order Price:
               </td>
               <td colSpan="3" className="total-value">
-                {totalOrderPrice} JD
+                {totalOrderPrice.toFixed(2)} JD
               </td>
             </tr>
             <tr>
@@ -252,7 +255,7 @@ if(incrementIndex === incrementValues[i] ){
                 Total Unpaid Price:
               </td>
               <td colSpan="3" className="total-value">
-                {totalUnpaidPrice} JD
+                {totalUnpaidPrice.toFixed(2)} JD
               </td>
             </tr>
             <tr>
@@ -260,7 +263,7 @@ if(incrementIndex === incrementValues[i] ){
                 Total Paid Price:
               </td>
               <td colSpan="3" className="total-value">
-                {totalPaidPrice} JD
+                {totalPaidPrice.toFixed(2)} JD
               </td>
             </tr>
             <tr>
