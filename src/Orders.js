@@ -8,6 +8,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [orders2, setOrders2] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [externalOrders, setExternalOrders] = useState(0);
 
   const navigate = useNavigate();
   const [cookies] = useCookies(['token', 'user']);
@@ -159,7 +160,7 @@ if (orders.length) {
     .reduce((total, order) => total + parseFloat(order.price), 0);
 
   // Calculate total number of orders
-  totalNumOrders = orders2.length;
+  totalNumOrders = orders2.length + Number(externalOrders);
   // Calculate unit price for dividing among orders
   const incrementValues = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00, 2.00,2.00,2.00];
   
@@ -286,8 +287,27 @@ if(incrementIndex === incrementValues[i] ){
     </>} 
   </td>
 </tr>
-
+<tr>
+  <td colSpan="4" className="total-label">
+  <input
+  type="number"
+  value={externalOrders}
+  onChange={(e) => setExternalOrders(parseInt(e.target.value))}
+  placeholder="Enter number of external orders"
+/>
+  </td>
+ 
+</tr>
+<tr>
+  <td colSpan="4" className="total-label">
+    Total Number of Orders:
+  </td>
+  <td colSpan="3" className="total-value">
+    {totalNumOrders}
+  </td>
+</tr>
           </tbody>
+     
         </table>
       )}
     </div>
