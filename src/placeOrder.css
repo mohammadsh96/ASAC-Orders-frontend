@@ -6,52 +6,29 @@
     background: #fccb90;
     background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
     background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-    margin-top: -10px;
   }
   
   .form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 600px;
-    margin-top: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 5px;
-    padding-bottom: 20px;
+    max-width: 400px;
+    padding: 20px;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
   
   .form-heading {
-    font-size: 24px;
-    margin-bottom: 0px;
-    font-family: 'Roboto', sans-serif;
-    color: #333333;
-    
+    margin-bottom: 20px;
   }
   
-  .form-image {
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 0px;
-   
+  .form-group {
+    margin-bottom: 15px;
   }
   
- 
-  
-  
-  .food-select,
-  .input {
-    width: 100%;
-    height: 40px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    font-size: 16px;
-    font-family: 'Roboto', sans-serif;
+  .form-group label {
+    font-weight: bold;
   }
   
   .button {
@@ -64,7 +41,44 @@
     cursor: pointer;
   }
   
-  .button:hover {
+  .food-select,
+  .input {
+    width: 50%; /* Adjust the width as per your preference */
+    height: 40px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 50%; /* Adjust the width as per your preference */
+  }
+  
+  .selected-foods {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .selected-food {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .selected-food button {
+    background: none;
+    border: none;
+    color: #ee7724;
+    cursor: pointer;
+  }
+  
+  .selected-food button:hover {
     text-decoration: underline;
   }
   
@@ -73,32 +87,74 @@
     margin-bottom: 10px;
   }
   
-  .text-muted {
-    color: #888;
+  .form-image {
+    width: 100%;
+    max-width: 185px;
+    margin-bottom: 0px;
   }
- 
   
-  .food-select option {
-   
-    background-color: #f2f2f2;
-    color: #000000;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
+  .form p {
     text-align: center;
-    font-weight: 500;
-    
+    margin-bottom: 10px;
+  }
+  
+  .form-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .form-label input {
+    margin-top: 5px;
+  }
+  
+  .form-label span {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-label input:disabled {
+    background-color: #f2f2f2;
+  }
+  
+  .form label {
+    width: 100%;
+  }
+  
+  .form .button {
+    margin-top: 10px;
+  }
+  
+  .form button:hover {
+    text-decoration: underline;
+  }
+  
+  .form label input[type='number']::-webkit-inner-spin-button,
+  .form label input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .form label input[type='number'] {
+    -moz-appearance: textfield;
+  }
+.food-select-flex{
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    justify-content: space-around;
 
+}  
+.food-select-flex button{
+  
+  margin-left: 30px;
+  height: 45px;
+  width: 80px;
+}
+.food-select-flex select{
+  
+    margin-left: 50px;
+    height: 40px;
+    width: 200px;
   }
-  
-  .food-select option:hover {
-  
-    background-color: #f38ed3;
-    color: #000000;
-  }
-  
-  .food-select option:selected {
-
-    background-color: #d6f1c9;
-    color: #000000;
-  }
-  

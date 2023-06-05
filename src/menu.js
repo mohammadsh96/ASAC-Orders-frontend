@@ -44,3 +44,17 @@ export const menu = [
     { name: "I am Good", price: '0.00' },
   
   ];
+  export const additions = [
+    { name: 'جبنه ماكينه', price: '0.50' },
+    { name: 'علبة مايونيز', price: '0.50' },
+    { name: 'علبة مخلل', price: '0.50' },
+    { name: 'سلطة كول سلو', price: '0.35' },
+    { name: 'علبة بطاطا', price: '0.75' }
+  ];
+  export const drinks = [
+    { name: 'بيبسي عادي', price: '0.35' },
+    { name: 'بيبسي دايت', price: '0.35' },
+    { name: 'سفن عادي', price: '0.35' },
+    { name: 'بيبسي دايت', price: '0.35' }
+  ];
+  

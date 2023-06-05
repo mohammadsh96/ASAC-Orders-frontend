@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import Orders from './Orders';
 import Swal from 'sweetalert2';
-
+import SendCalculations from './calc';
 import './home.css';
 
 const Home = () => {
@@ -74,6 +74,8 @@ const Home = () => {
                 </button>)}
                 
               </li>
+<SendCalculations/>
+
             </>
           )}
         </ul>

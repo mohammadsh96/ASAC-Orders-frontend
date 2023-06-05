@@ -30,6 +30,11 @@ const Orders = () => {
       setOrders2(filteredOrders);
       
       setLoading(false);
+
+      const response2 = await fetch('https://asac-orders-system.onrender.com/external-orders');
+      const data2 = await response2.json();
+      setExternalOrders(parseInt(data2.numberOfExternalOrders))
+
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +82,32 @@ const Orders = () => {
   const handleEdit = async (orderId) => {
     navigate(`/orders/${orderId}/edit`);
   };
-
+//update external orders : 
+const setExternalOrdersFun = async(e)=>{
+ e.preventDefault()
+  console.log(externalOrders);
+  console.log(typeof externalOrders);
+  try {
+    const response = await fetch(`https://asac-orders-system.onrender.com/external-orders`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      
+      },
+      body: JSON.stringify({increment:parseInt(externalOrders) }),
+    });
+   if(response.ok){
+    // const responseData = await response.json();
+    // console.log(responseData.numberOfExternalOrders);  
+    // setExternalOrders(parseInt(responseData.numberOfExternalOrders))
+   }
+  } catch (error) {
+    console.log(error);
+  } 
+  finally {
+    setLoading(false);
+  }
+}
   const handleApprove = async (orderId) => {
     try {
       const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}/approve`, {
@@ -205,7 +235,7 @@ if(incrementIndex === incrementValues[i] ){
             <tr>
               <th>Name</th>
               <th>Food</th>
-              <th>Quantity</th>
+              {/* <th>Quantity</th> */}
               <th>Price</th>
               <th>Payment Status</th>
               <th>Payment Received</th>
@@ -217,8 +247,8 @@ if(incrementIndex === incrementValues[i] ){
               <tr key={order._id} className={order.approved ? 'approved' : 'unapproved'}>
                 <td>{order.name}</td>
                 <td id='food-name'>{order.food}</td>
-                <td>{order.quantity}</td>
-                {order.food==="I am Good" ? <td>{order.price}</td> : <td>{order.price + incrementIndex}</td>}
+                {/* <td>{order.quantity}</td> */}
+                {order.food==="I am Good" ? <td>{order.price}</td> : <td>{(order.price + incrementIndex).toFixed(2)}</td>}
                 
                 <td className={order.paymentStatus === 'Paid' ? 'paid' : 'unpaid'}>
                   {order.paymentStatus}
@@ -233,10 +263,10 @@ if(incrementIndex === incrementValues[i] ){
                 <td>
                   {cookies.user && order.userId === cookies.user._id && (
                     <>
-                      {cookies.user.email === 'mhmd.shrydh1996@gmail.com' && (
+                      {/* {cookies.user.email === 'mhmd.shrydh1996@gmail.com' && (
                         <button onClick={() => handleViewOrder(order._id)}>View</button>
-                      )}
-                      <button onClick={() => handleEdit(order._id)}>Edit/Pay</button>
+                      )} */}
+                      <button onClick={() => handleEdit(order._id)}>Pay</button>
                       <button onClick={() => handleDelete(order._id)}>Delete</button>
                     </>
                   )}
@@ -269,10 +299,10 @@ if(incrementIndex === incrementValues[i] ){
             </tr>
             <tr>
               <td colSpan="4" className="total-label">
-                Total Number of Orders:
+                Total Number of ASAC Orders:
               </td>
               <td colSpan="3" className="total-value">
-                {totalNumOrders}
+                {totalNumOrders-externalOrders}
               </td>
             </tr>
             <tr>
@@ -287,23 +317,35 @@ if(incrementIndex === incrementValues[i] ){
     </>} 
   </td>
 </tr>
-<tr>
+
+
+           
+{cookies.user && cookies.user.email ==='mhmd.shrydh1996@gmail.com' ?<tr>
+  <td colSpan="4" className="total-label">How many external Orders? </td>
   <td colSpan="4" className="total-label">
-  <input
-  type="number"
-  value={externalOrders}
-  onChange={(e) => setExternalOrders(parseInt(e.target.value))}
-  placeholder="Enter number of external orders"
-/>
+    <form onSubmit={setExternalOrdersFun} style={{ display: 'flex', alignItems: 'center' }}>
+      <input
+        type="number"
+        value={externalOrders}
+        onChange={(e) => {
+          const value = e.target.value;
+          setExternalOrders(value ? parseInt(value) : 0); // Set to empty string if value is empty
+        }}
+        placeholder="Enter number of external orders"
+        style={{ marginRight: '10px' }}
+      />
+      <button type="submit" style={{ padding: '5px 10px' }}>SAVE</button>
+    </form>
   </td>
- 
 </tr>
+: <></>}
+
 <tr>
   <td colSpan="4" className="total-label">
     Total Number of Orders:
   </td>
   <td colSpan="3" className="total-value">
-    {totalNumOrders}
+    {totalNumOrders}  
   </td>
 </tr>
           </tbody>

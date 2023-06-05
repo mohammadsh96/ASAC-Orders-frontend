@@ -68,7 +68,7 @@ if(!show){
     <div className="edit-form-container">
       {show && (
         <div className="edit-form-content">
-          <h2>Edit {formData.name} Order</h2>
+          <h2>Hi {formData.name} 👋 did you pay ?</h2>
           <form onSubmit={handleSubmit}>
         <div className="form-group">
               {/* <label htmlFor="name">{formData.name}</label> */}
@@ -84,7 +84,7 @@ if(!show){
 
 
 
-<div className="form-group">
+{/* <div className="form-group">
   <label htmlFor="food">Food:</label>
   <select
     id="food"
@@ -99,9 +99,9 @@ if(!show){
       </option>
     ))}
   </select>
-</div>
+</div> */}
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="quantity">Quantity:</label>
               <input
                 type="number"
@@ -110,7 +110,7 @@ if(!show){
                 value={formData.quantity || ''}
                 onChange={handleInputChange}
               />
-            </div>
+            </div> */}
             {/* <div className="form-group">
               <label htmlFor="price">Price:</label>
               <input

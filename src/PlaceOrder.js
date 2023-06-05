@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import './placeOrder.css';
-import './signin.css'; 
 import Swal from 'sweetalert2';
-import { menu } from './menu';
+import { menu,additions,drinks } from './menu';
+import './placeOrder.css';
 
 const PlaceOrder = () => {
   const [food, setFood] = useState('');
-  const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState(1); // Set default quantity to 1
+  const [price, setPrice] = useState(0);
   const [error, setError] = useState('');
   const [cookies] = useCookies(['token']);
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
+  const [selectedFoods, setSelectedFoods] = useState([]);
 
   useEffect(() => {
     const savedOrders = JSON.parse(localStorage.getItem('orders'));
@@ -21,12 +21,13 @@ const PlaceOrder = () => {
       setOrders(savedOrders);
     }
   }, []);
-console.log(orders);
+
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
 
     try {
-      const totalPrice = price * quantity; // Calculate the total price based on quantity
+      const totalPrice =
+        selectedFoods.reduce((total, food) => total + parseFloat(food.price), 0) * quantity; // Calculate the total price based on quantity and selected food items
 
       const response = await fetch('https://asac-orders-system.onrender.com/orders', {
         method: 'POST',
@@ -34,7 +35,11 @@ console.log(orders);
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookies.token}`,
         },
-        body: JSON.stringify({ food, quantity, price: totalPrice }), // Pass the total price to the API
+        body: JSON.stringify({
+          food: selectedFoods.map((food) => food.name).join('+'),
+          quantity: selectedFoods.length, // Send the quantity based on the number of selected food items
+          price: totalPrice,
+        }),
       });
 
       if (response.ok) {
@@ -50,23 +55,29 @@ console.log(orders);
         const errorData = await response.json();
         setError(errorData.message);
       }
-      
-      // Check if the user already has an order
+
       if (orders.length > 0 && cookies.user) {
         const userOrder = orders.find((order) => order.userId === cookies.user._id);
         if (userOrder) {
-          // Update the existing order by combining the food names and adding the prices
-          const updatedFood = userOrder.food + ' + ' + food;
-          const updatedPrice = parseFloat(userOrder.price) + totalPrice;
-          
-          const updateResponse = await fetch(`https://asac-orders-system.onrender.com/orders/${userOrder._id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${cookies.token}`,
-            },
-            body: JSON.stringify({name:cookies.user.name, food: updatedFood, price: updatedPrice,quantity }),
-          });
+          const updatedFoods = [...selectedFoods, { name: food, price: totalPrice }];
+          const updatedPrice = updatedFoods.reduce((total, food) => total + food.price, 0);
+
+          const updateResponse = await fetch(
+            `https://asac-orders-system.onrender.com/orders/${userOrder._id}`,
+            {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${cookies.token}`,
+              },
+              body: JSON.stringify({
+                name: cookies.user.name,
+                food: updatedFoods.map((food) => food.name).join('+'),
+                price: updatedPrice,
+                quantity: updatedFoods.length, // Send the quantity based on the number of updated food items
+              }),
+            }
+          );
 
           if (updateResponse.ok) {
             // Existing order updated successfully
@@ -91,30 +102,83 @@ console.log(orders);
       });
     }
   };
-  
+
   const handleFoodChange = (e) => {
     const selectedFood = e.target.value;
     setFood(selectedFood);
 
-    // Find the selected food item from the menu array
     const selectedFoodItem = menu.find((item) => item.name === selectedFood);
     if (selectedFoodItem) {
       setPrice(selectedFoodItem.price);
     }
   };
 
+  const handleAddFood = () => {
+    const selectedFoodItem = menu.find((item) => item.name === food);
+    if (selectedFoodItem) {
+      setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
+      setFood('');
+      setPrice(0);
+    }
+  };
+
+  const handleRemoveFood = (foodName) => {
+    setSelectedFoods((prevFoods) => prevFoods.filter((food) => food.name !== foodName));
+  };
+// additions
+const handleFoodChange1 = (e) => {
+  const selectedFood = e.target.value;
+  setFood(selectedFood);
+
+  const selectedFoodItem = additions.find((item) => item.name === selectedFood);
+  if (selectedFoodItem) {
+    setPrice(selectedFoodItem.price);
+  }
+};
+
+const handleAddFood1 = () => {
+  const selectedFoodItem = additions.find((item) => item.name === food);
+  if (selectedFoodItem) {
+    setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
+    setFood('');
+    setPrice(0);
+  }
+};
+
+const handleRemoveFood1 = (foodName) => {
+  setSelectedFoods((prevFoods) => prevFoods.filter((food) => food.name !== foodName));
+};
+// drinnks
+const handleFoodChange2 = (e) => {
+  const selectedFood = e.target.value;
+  setFood(selectedFood);
+
+  const selectedFoodItem = drinks.find((item) => item.name === selectedFood);
+  if (selectedFoodItem) {
+    setPrice(selectedFoodItem.price);
+  }
+};
+
+const handleAddFood2 = () => {
+  const selectedFoodItem = drinks.find((item) => item.name === food);
+  if (selectedFoodItem) {
+    setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
+    setFood('');
+    setPrice(0);
+  }
+};
+
+const handleRemoveFood2 = (foodName) => {
+  setSelectedFoods((prevFoods) => prevFoods.filter((food) => food.name !== foodName));
+};
   return (
     <div className="place-order-container">
       <form className="form" onSubmit={handlePlaceOrder}>
         <h2 className="form-heading">Place Order</h2>
         <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" alt="ASAC Logo" className="form-image" />
         <p>Not powered by Shawarma Arab</p>
-        <select
-          className="food-select"
-          value={food}
-          onChange={handleFoodChange}
-          required
-        >
+        <div className="food-select-flex">
+        <select className="food-select" value={food} onChange={handleFoodChange}>
           <option value="">Select Food</option>
           {menu.map((item) => (
             <option key={item.name} value={item.name}>
@@ -122,28 +186,50 @@ console.log(orders);
             </option>
           ))}
         </select>
-        <label>
-          Quantity:
-          <input
-            className="input"
-            type="number"
-            placeholder="Quantity"
-            value={quantity}
-            onChange={(e) => setQuantity(parseInt(e.target.value))}
-          />
-        </label>
-        <label>
-          Price:
-          <input
-            className="input"
-            type="number"
-            placeholder="Price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            disabled
-          />
-        </label>
-        <button className="button" type="submit">Submit</button>
+        <button className="button" type="button" onClick={handleAddFood}>
+          Add Food
+        </button>
+        </div>
+        <div className="food-select-flex">
+        <select className="food-select" value={food} onChange={handleFoodChange}>
+          <option value="">Select additions</option>
+          {additions.map((item) => (
+            <option key={item.name} value={item.name}>
+              {item.name}
+            </option>
+          ))}
+        </select>
+        <button className="button" type="button" onClick={handleAddFood1}>
+          Add additions
+        </button>
+        </div>
+        <div className="food-select-flex">
+        <select className="food-select" value={food} onChange={handleFoodChange1}>
+          <option value="">Select drinks</option>
+          {drinks.map((item) => (
+            <option key={item.name} value={item.name}>
+              {item.name}
+            </option>
+          ))}
+        </select>
+        <button className="button" type="button" onClick={handleAddFood2}>
+          Add drinks
+        </button>
+        </div>
+        <div className="selected-foods">
+          {selectedFoods.map((food) => (
+            <div key={food.name} className="selected-food">
+              <span>{food.name}</span>
+              <span>{food.price}$</span>
+              <button type="button" onClick={() => handleRemoveFood2(food.name)}>
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+        <button className="button" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
