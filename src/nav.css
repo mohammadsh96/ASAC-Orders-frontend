@@ -3,7 +3,9 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #f2f2f2;
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+
   }
   
   .logo {
@@ -14,24 +16,38 @@ nav {
   .nav-links1 {
     list-style: none;
     display: flex;
+    justify-content: center;
     gap: 20px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
   
   .nav-links1 li {
-    font-size: 18px;
-    width: fit-content;
-    padding: 2px;
+    font-size: 14px;
+    width: 100%;
+    padding: 4px;
+    border-radius: 5px ;
+    border: 2px solid  #ffffff;
+    box-shadow: 2px 2px 8px white;
+    font-weight: 400;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
   
   .nav-links1 a {
     text-decoration: none;
-    color: #333;
-    box-shadow: 2px 2px  2px rgb(250, 114, 155);
+    color: rgb(255, 255, 255);
+    
+    
+   
   }
   
   .nav-links1 a:hover {
-    color: #ee7724;
+    color: #ffffff;
+
+  }
+  .nav-links1 li:hover {
+    border: 2px solid  #ffffff;
+    box-shadow: 4px 4px 12px white;
+
   }
   
   
@@ -45,10 +61,12 @@ nav {
     .nav-links1 {
       flex-direction: column;
       gap: 10px;
+      align-items: center;
     }
   
     .nav-links1 li {
-      font-size: 16px;
+      font-size: 10px;
+      margin-left: -10px;
     }
   }
   

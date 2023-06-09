@@ -27,23 +27,13 @@ const SendCalculations = () => {
   }
 
   return (
-    <div>
-     <button
+     <button className='nav-link-button' id='minmise' 
     onClick={handleSendCalculations}
-    // disabled={isCalculationsSent}
-    style={{
-      padding: '10px 20px',
-      backgroundColor: '#ee7724',
-      backgroundImage: 'linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      cursor: 'pointer'
-    }}
+  
   >
     Send Calculations
   </button>
-    </div>
+    
   );
 };
 

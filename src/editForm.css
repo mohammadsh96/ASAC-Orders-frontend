@@ -58,6 +58,11 @@ select {
     border-radius: 4px;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    color: #fff;
+  }
+  input::placeholder {
+    color: #ffffff; /* Replace with the desired font color */
   }
   
   .form-actions {

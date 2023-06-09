@@ -1,21 +1,22 @@
 .footer-text {
 
     font-size: 16px;
-    color: #555;
+    color: #ffffff;
   }
   
   .name {
 
     font-size: 20px;
-    color: #333;
+    color: #ffffff;
     font-weight: bold;
   }
 .footer {
-    background-color: #f2f2f2;
+  background-image: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  color: white;
     padding: 10px;
     text-align: center;
     font-size: 14px;
-    color: #555;
+   
   }
   
   .footer-content {
@@ -27,6 +28,7 @@
   
   .footer-text {
     margin: 5px;
+  
   }
   
   .contact-info {
@@ -40,8 +42,12 @@
   
   .social-link {
     margin: 0 10px;
-    color: #0366d6;
+    color: #ffffff;
     text-decoration: none;
+  }
+  .social-link:hover{
+    color: #9ff3ec;
+
   }
   
   .profile-image {
