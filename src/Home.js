@@ -19,7 +19,7 @@ const Home = () => {
 
   const handleClearAllOrders = async () => {
     try {
-      const response = await fetch('http://localhost:3001/orders/clear/all', {
+      const response = await fetch('https://asac-orders-system.onrender.com/orders/clear/all', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

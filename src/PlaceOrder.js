@@ -40,7 +40,7 @@ if(signedIn.token===''){
         const totalPrice =
           selectedFoods.reduce((total, food) => total + parseFloat(food.price), 0) * quantity; // Calculate the total price based on quantity and selected food items
   
-        const response = await fetch('http://localhost:3001/orders', {
+        const response = await fetch('https://asac-orders-system.onrender.com/orders', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ if(signedIn.token===''){
             const updatedPrice = updatedFoods.reduce((total, food) => total + food.price, 0);
   
             const updateResponse = await fetch(
-              `http://localhost:3001/orders/${userOrder._id}`,
+              `https://asac-orders-system.onrender.com/orders/${userOrder._id}`,
               {
                 method: 'PUT',
                 headers: {

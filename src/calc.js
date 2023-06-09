@@ -6,7 +6,7 @@ const SendCalculations = () => {
 
   const handleSendCalculations = async () => {
     try {
-      const response = await fetch('http://localhost:3001/send-calculations');
+      const response = await fetch('https://asac-orders-system.onrender.com/send-calculations');
       const data = await response.json();
       console.log(data);
       setCalculationsSent(true);
