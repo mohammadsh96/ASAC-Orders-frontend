@@ -144,8 +144,8 @@ const Orders = () => {
   if (placedOrder.ok) {
     Swal.fire({
       icon: 'success',
-      title: 'Order add successfully',
-      text: '+1',
+      title: 'Order added successfully +1',
+      text: 'success',
     });
     setLoading2(true)
     fetchOrders()
@@ -314,7 +314,7 @@ const Orders = () => {
                     <>
                       <button onClick={() => handleDelete(order._id)}>Delete</button>
                     </>
-                  ):<> {loading2?<button onClick={() => askForTheSame(order._id)}>ask for the same</button> : <div className="loading-spinner2"></div> }  </>}
+                  ):<> {loading2?<button onClick={() => askForTheSame(order._id)}>same same  </button> : <div className="loading-spinner2"></div> }  </>}
                 </td>   }
                 
               </tr>
@@ -323,7 +323,7 @@ const Orders = () => {
         </table>
     
             <table className="totals-table" style={{ width: "80%", marginTop: "20px" }}>
-              <tbody>
+              <tbody>i
                 <tr>
                   <td colSpan="2" className="total-label">
                     Total Order Price:
