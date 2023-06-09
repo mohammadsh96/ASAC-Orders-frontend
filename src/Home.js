@@ -56,7 +56,7 @@ const Home = () => {
           {(cookies.token === '' || cookies.token === undefined )&& (
             <li>
               <button className="nav-link-button">
-                <Link to="/signin">Signin</Link>
+                <Link to="/place-order">Place Order ➕</Link>
               </button>
             </li>
           )}
