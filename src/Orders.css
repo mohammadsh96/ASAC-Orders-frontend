@@ -214,10 +214,16 @@ button {
 
   .orders-table button,
   .totals-table button {
-    font-size: 6px;
-    height: 12px;
+    font-size: 4px;
+    height: fit-content;
     width: fit-content;
     padding: 2px;
     margin-top: 2px;
+  }
+  .loading-spinner2 {
+   
+    width: 10px;
+    height: 10px;
+   
   }
 }
