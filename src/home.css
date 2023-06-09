@@ -5,35 +5,50 @@
   
   .home-heading {
     font-family: 'Roboto', sans-serif;
-    font-size: 36px;
+    font-size: 32px;
     color: #ee7724;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 14px #b44593;
+    
   }
-  
+  .main-nav{
+    display: flex;
+    justify-content: space-between;
+  }
+  .main-nav ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .nav-links {
     list-style: none;
     padding: 0;
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+
   }
-  
+ 
   .nav-links li {
     margin: 0 10px;
   }
   
   .nav-link-button {
     background-color: #ff5555;
-    border: none;
+    border: 2px double  #fbfbfb;
+    box-shadow: 2px 2px 8px white;
     padding: 10px 20px;
     font-weight: bold;
     cursor: pointer;
     height: fit-content;
     width: fit-content;
   }
-  
+
+  #margin-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
   a {
     text-decoration: none;
     color: #fff;
@@ -44,12 +59,13 @@
   }
   
   .signout-button {
+    background-color: #ff5555;
+    border: 2px solid  #fbfbfb;
+    box-shadow: 2px 2px 8px white;
     padding: 5px 10px;
     background-color: #ee7724;
     background-image: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
     color: white;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     text-decoration: none;
@@ -81,5 +97,13 @@
     .nav-links li {
       margin: 5px;
     }
+    .signout-button{
+      font: 2em sans-serif;
+      align-self: center;
+    }
+#minmise{
+  font-size: 6px;
+  width: 100%;
+}
   }
   

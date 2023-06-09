@@ -36,7 +36,7 @@ const Signup = () => {
     <div className="signup-container">
       <div className="signup-content">
         <div className="signup-form">
-          <h4 className="signup-heading">Join ASAC Irbid Team</h4>
+          <h4 className="text-center">Join ASAC Irbid Team</h4>
           <form onSubmit={handleSignup}>
             <div className="form-group">
               <label htmlFor="name">Name</label>
@@ -50,11 +50,15 @@ const Signup = () => {
               <label htmlFor="password">Password</label>
               <input type="password" name="password" id="password" placeholder="Enter your password" />
             </div>
+            <div className="text-center" >
             <button type="submit" className="signup-button">Sign Up</button>
+            </div>
           </form>
-          <a className="signin-link" href="/signin">
+          <div className='haveAcc'>
+          <a className="Already" href="/signin">
             Already have an account?
           </a>
+          </div>
         </div>
         <div className="signup-image">
           <img

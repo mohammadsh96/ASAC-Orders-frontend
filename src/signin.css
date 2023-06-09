@@ -1,28 +1,31 @@
 .signin-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #fccb90;
-    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    
+    background: #fbfbfb;
+    
   }
-  
-  .signin-form {
+  .signin-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 400px;
-    padding: 40px;
+    padding: 50px;
     background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-left: 2px solid #b44593;
+    border-right: 2px solid #b44593;
+    box-shadow: 2px 2px 10px #b44593;
+    border-top-right-radius: 200px;
+    border-top-left-radius: 200px;
+    justify-content: center;
+    
   }
+  
+
   
   .signin-image {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
+    justify-content: center;
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
   }
   
   .signin-image img {
@@ -30,10 +33,14 @@
   }
   
   .input-field {
-    margin-bottom: 10px;
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    color: #fff;
   }
   
   .signin-button {
@@ -44,6 +51,12 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 20px;
+    font: 1em sans-serif;
+
+  }
+  .signin-button:hover{
+box-shadow: 2px 2px 6px #b44593;
   }
   
   .error-message {
@@ -64,9 +77,47 @@
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
+    
   }
-  
+  .text-center{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: #ee7724;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 15px #b44593;
+    display: flex;
+  }
+  .haveAcc{
+    display: flex;
+    justify-content: center;
+  }
   .nav-link-button:hover {
     text-decoration: underline;
   }
+  .mb-0{
+    margin-top: 10px;
+      text-decoration: none;
+      color: #ee7724;
+
+   
+  }
+  .mb-0:hover{
+    cursor: pointer;
+    text-decoration: none;
+    color: #b44593;
+ 
+}
+
+label {
+  font-weight: bold;
+  color: #40082f;
+  text-decoration-color: #ee7724;
+  display: block;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #333333;
+  margin-bottom: 5px;
   
+}
+

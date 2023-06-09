@@ -50,8 +50,8 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h2 className="home-heading">ASAC Irbid Team Orders</h2>
-      <nav>
+      <h3 className="home-heading">ASAC Irbid Team Orders</h3>
+      <nav className='main-nav'>
         <ul className="nav-links">
           {(cookies.token === '' || cookies.token === undefined )&& (
             <li>
@@ -62,7 +62,7 @@ const Home = () => {
           )}
 
           {cookies.token !== '' && cookies.token !== undefined &&(
-            <>
+            <div id='margin-buttons'>
               <li>
                 <button className="nav-link-button">
                   <Link to="/place-order">Place Order ➕</Link>
@@ -76,7 +76,7 @@ const Home = () => {
               </li>
 <SendCalculations/>
 
-            </>
+            </div>
           )}
         </ul>
         {cookies.token !== '' && cookies.token !== undefined &&(

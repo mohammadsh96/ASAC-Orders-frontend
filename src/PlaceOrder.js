@@ -16,7 +16,7 @@ const PlaceOrder = () => {
   const [selectedFoods, setSelectedFoods] = useState([]);
 const [signedIn] =useCookies(['token'])
 console.log(signedIn);
-if(signedIn.token===''){
+if(!signedIn.token){
   Swal.fire({
     icon: 'warning',
     title: 'Please Login into your account',
@@ -162,13 +162,15 @@ if(signedIn.token===''){
   };
   return (
     <div className="place-order-container">
-      <form className="form" onSubmit={handlePlaceOrder}>
-        <h2 className="form-heading">Place Order</h2>
-        <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" alt="ASAC Logo" className="form-image" />
-        <p>Not powered by Shawarma Arab</p>
+      <div className="signin-content">
+      <form  onSubmit={handlePlaceOrder}>
+      <div className="text-center">
+        <h4 className="form-heading">Select & Enjoy Your Meal</h4>
+        </div>
+        
         <div className="food-select-flex">
           <select className="food-select" value={food} onChange={handleFoodChange}>
-            <option value="">Select Food</option>
+            <option value="">Select Meal</option>
             {menu.map((item) => (
               <option key={item.name} value={item.name}>
                 {item.name}
@@ -188,7 +190,7 @@ if(signedIn.token===''){
         </div>
         <div className="food-select-flex">
           <select className="food-select" value={food} onChange={handleFoodChange2}>
-            <option value="">Select drinks</option>
+            <option value="">Select drink</option>
             {drinks.map((item) => (
               <option key={item.name} value={item.name}>
                 {item.name}
@@ -207,10 +209,16 @@ if(signedIn.token===''){
             </div>
           ))}
         </div>
+        <div className="text-center pt-1 mb-5 pb-1">
         <button className="button" type="submit">
           Submit
         </button>
+        </div>
       </form>
+      <div className="signin-image" id='img-margin'>
+        <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" alt="ASAC Logo" className="form-image" />
+        </div>
+        </div>
     </div>
   );
   

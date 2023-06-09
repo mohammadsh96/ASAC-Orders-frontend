@@ -30,12 +30,12 @@ const Orders = () => {
       const filteredOrders = data.filter((item) => item.food !== "I am Good");
       setOrders2(filteredOrders);
 
-      setLoading(false);
+      
 
       const response2 = await fetch('https://asac-orders-system.onrender.com/external-orders');
       const data2 = await response2.json();
       setExternalOrders(parseInt(data2.numberOfExternalOrders))
-
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -145,7 +145,7 @@ const Orders = () => {
     Swal.fire({
       icon: 'success',
       title: 'Order added successfully +1',
-      text: 'success',
+     
     });
     setLoading2(true)
     fetchOrders()
@@ -289,6 +289,9 @@ const Orders = () => {
           <div className="loading-spinner"></div>
         ) : (
           <>
+          <div className='text-center'>
+      <h5>Orders</h5>
+    </div>
           <table className="orders-table">
           <thead>
             <tr>
@@ -321,9 +324,11 @@ const Orders = () => {
             ))}
           </tbody>
         </table>
-    
-            <table className="totals-table" style={{ width: "80%", marginTop: "20px" }}>
-              <tbody>i
+    <div className='text-center'>
+      <h5>Calculations</h5>
+    </div>
+            <table className="totals-table" >
+              <tbody>
                 <tr>
                   <td colSpan="2" className="total-label">
                     Total Order Price:
