@@ -8,6 +8,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [orders2, setOrders2] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const [externalOrders, setExternalOrders] = useState(0);
 
   const navigate = useNavigate();
@@ -114,6 +115,7 @@ const Orders = () => {
     }
   }
   const askForTheSame = async (orderId) => {
+    setLoading2(false)
     try {
       const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}`, {
         headers: {
@@ -122,6 +124,7 @@ const Orders = () => {
       });
   
       if (response.ok) {
+        //add loader here
         const order = await response.json();
   
         console.log(order);
@@ -139,6 +142,12 @@ const Orders = () => {
           }),
         });
   if (placedOrder.ok) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Order add successfully',
+      text: '+1',
+    });
+    setLoading2(true)
     fetchOrders()
   }else{
     Swal.fire({
@@ -305,8 +314,8 @@ const Orders = () => {
                     <>
                       <button onClick={() => handleDelete(order._id)}>Delete</button>
                     </>
-                  ):<>   <button onClick={() => askForTheSame(order._id)}>ask for the same</button></>}
-                </td>}
+                  ):<> {loading2?<button onClick={() => askForTheSame(order._id)}>ask for the same</button> : <div className="loading-spinner2"></div> }  </>}
+                </td>   }
                 
               </tr>
             ))}
