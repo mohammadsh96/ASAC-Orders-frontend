@@ -12,6 +12,7 @@ const Signin = () => {
 
   const handleSignin = async (e) => {
     e.preventDefault();
+    setError('');
 
     try {
       const response = await fetch('https://asac-orders-system.onrender.com/signin', {
@@ -37,7 +38,7 @@ const Signin = () => {
       } else {
         // Signin failed
         const errorData = await response.json();
-        setError(errorData.message);
+        alert(errorData.message);
       }
     } catch (error) {
       console.log(error);
@@ -61,16 +62,16 @@ const Signin = () => {
       <form className="gradient-form signin-form" onSubmit={handleSignin}>
         <div className="d-flex flex-column ms-5">
           <div className="text-center">
-            <h4 className="mt-1 mb-5 pb-1">Welcomt to ASAC Irbid Team </h4>
+            <h4 className="mt-1 mb-5 pb-1">Welcome to ASAC Irbid Team</h4>
           </div>
-          <p> login to your account</p>
+          <p>login to your account</p>
           <div className="mb-4">
             <input
               className="input-field"
               type="email"
               placeholder="Email address"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)} required
             />
           </div>
           <div className="mb-4">
@@ -79,23 +80,20 @@ const Signin = () => {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)} required
             />
           </div>
           <div className="text-center pt-1 mb-5 pb-1">
             <button className="mb-4 w-100 gradient-custom-2 signin-button" type="submit">Sign in</button>
-            {/* <a className="text-muted" href="#!">Forgot password?</a> */}
           </div>
           <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
             <p className="mb-0">Don't have an account?</p>
             <button className="mx-2 nav-link-button" onClick={() => navigate('/signup')} type="button">
               Sign Up
             </button>
-
           </div>
-            <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" style={{ width: '185px' }} alt="logo" />
+          <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" style={{ width: '185px' }} alt="logo" />
         </div>
-        
       </form>
     </div>
   );

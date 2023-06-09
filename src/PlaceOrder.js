@@ -106,71 +106,41 @@ const PlaceOrder = () => {
   const handleFoodChange = (e) => {
     const selectedFood = e.target.value;
     setFood(selectedFood);
-
+  
     const selectedFoodItem = menu.find((item) => item.name === selectedFood);
-    if (selectedFoodItem) {
-      setPrice(selectedFoodItem.price);
-    }
-  };
-
-  const handleAddFood = () => {
-    const selectedFoodItem = menu.find((item) => item.name === food);
     if (selectedFoodItem) {
       setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
       setFood('');
       setPrice(0);
     }
   };
-
-  const handleRemoveFood = (foodName) => {
-    setSelectedFoods((prevFoods) => prevFoods.filter((food) => food.name !== foodName));
+  
+  const handleFoodChange1 = (e) => {
+    const selectedFood = e.target.value;
+    setFood(selectedFood);
+  
+    const selectedFoodItem = additions.find((item) => item.name === selectedFood);
+    if (selectedFoodItem) {
+      setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
+      setFood('');
+      setPrice(0);
+    }
   };
-// additions
-const handleFoodChange1 = (e) => {
-  const selectedFood = e.target.value;
-  setFood(selectedFood);
-
-  const selectedFoodItem = additions.find((item) => item.name === selectedFood);
-  if (selectedFoodItem) {
-    setPrice(selectedFoodItem.price);
-  }
-};
-
-const handleAddFood1 = () => {
-  const selectedFoodItem = additions.find((item) => item.name === food);
-  if (selectedFoodItem) {
-    setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
-    setFood('');
-    setPrice(0);
-  }
-};
-
-const handleRemoveFood1 = (foodName) => {
-  setSelectedFoods((prevFoods) => prevFoods.filter((food) => food.name !== foodName));
-};
-// drinnks
-const handleFoodChange2 = (e) => {
-  const selectedFood = e.target.value;
-  setFood(selectedFood);
-
-  const selectedFoodItem = drinks.find((item) => item.name === selectedFood);
-  if (selectedFoodItem) {
-    setPrice(selectedFoodItem.price);
-  }
-};
-
-const handleAddFood2 = () => {
-  const selectedFoodItem = drinks.find((item) => item.name === food);
-  if (selectedFoodItem) {
-    setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
-    setFood('');
-    setPrice(0);
-  }
-};
-
-const handleRemoveFood2 = (foodName) => {
-  setSelectedFoods((prevFoods) => prevFoods.filter((food) => food.name !== foodName));
-};
+  
+  const handleFoodChange2 = (e) => {
+    const selectedFood = e.target.value;
+    setFood(selectedFood);
+  
+    const selectedFoodItem = drinks.find((item) => item.name === selectedFood);
+    if (selectedFoodItem) {
+      setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
+      setFood('');
+      setPrice(0);
+    }
+  };
+  const handleRemoveFood2 = (name) => {
+    setSelectedFoods((prevFoods) => prevFoods.filter((food) => food.name !== name));
+  };
   return (
     <div className="place-order-container">
       <form className="form" onSubmit={handlePlaceOrder}>
@@ -178,43 +148,34 @@ const handleRemoveFood2 = (foodName) => {
         <img src="https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg" alt="ASAC Logo" className="form-image" />
         <p>Not powered by Shawarma Arab</p>
         <div className="food-select-flex">
-        <select className="food-select" value={food} onChange={handleFoodChange}>
-          <option value="">Select Food</option>
-          {menu.map((item) => (
-            <option key={item.name} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-        <button className="button" type="button" onClick={handleAddFood}>
-          Add Food
-        </button>
+          <select className="food-select" value={food} onChange={handleFoodChange}>
+            <option value="">Select Food</option>
+            {menu.map((item) => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="food-select-flex">
-        <select className="food-select" value={food} onChange={handleFoodChange}>
-          <option value="">Select additions</option>
-          {additions.map((item) => (
-            <option key={item.name} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-        <button className="button" type="button" onClick={handleAddFood1}>
-          Add additions
-        </button>
+          <select className="food-select" value={food} onChange={handleFoodChange1}>
+            <option value="">Select additions</option>
+            {additions.map((item) => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="food-select-flex">
-        <select className="food-select" value={food} onChange={handleFoodChange1}>
-          <option value="">Select drinks</option>
-          {drinks.map((item) => (
-            <option key={item.name} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-        <button className="button" type="button" onClick={handleAddFood2}>
-          Add drinks
-        </button>
+          <select className="food-select" value={food} onChange={handleFoodChange2}>
+            <option value="">Select drinks</option>
+            {drinks.map((item) => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="selected-foods">
           {selectedFoods.map((food) => (
@@ -233,6 +194,7 @@ const handleRemoveFood2 = (foodName) => {
       </form>
     </div>
   );
+  
 };
 
 export default PlaceOrder;

@@ -69,6 +69,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 5px;
+    border: 2px dotted #b44593;
   }
   
   .selected-food button {
@@ -154,7 +155,8 @@
 }
 .food-select-flex select{
   
-    margin-left: 50px;
+    margin-left: auto;
+    margin-right: auto;
     height: 40px;
     width: 200px;
   }
