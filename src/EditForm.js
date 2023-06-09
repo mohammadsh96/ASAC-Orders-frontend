@@ -13,7 +13,7 @@ const EditForm = () => {
 
   const fetchOrder = async () => {
     try {
-      const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}`, {
+      const response = await fetch(`http://localhost:3001/orders/${orderId}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookies.token}`,
@@ -43,7 +43,7 @@ if(!show){
     event.preventDefault();
 
     try {
-      const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}`, {
+      const response = await fetch(`http://localhost:3001/orders/${orderId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

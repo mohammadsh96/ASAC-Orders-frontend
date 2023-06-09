@@ -20,7 +20,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('https://asac-orders-system.onrender.com/orders', {
+      const response = await fetch('http://localhost:3001/orders', {
         headers: {
           Authorization: `Bearer ${cookies.token}`,
         },
@@ -32,7 +32,7 @@ const Orders = () => {
 
       setLoading(false);
 
-      const response2 = await fetch('https://asac-orders-system.onrender.com/external-orders');
+      const response2 = await fetch('http://localhost:3001/external-orders');
       const data2 = await response2.json();
       setExternalOrders(parseInt(data2.numberOfExternalOrders))
 
@@ -44,7 +44,7 @@ const Orders = () => {
   const handleDelete = async (orderId) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}`, {
+      const response = await fetch(`http://localhost:3001/orders/${orderId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ const Orders = () => {
     console.log(externalOrders);
     console.log(typeof externalOrders);
     try {
-      const response = await fetch(`https://asac-orders-system.onrender.com/external-orders`, {
+      const response = await fetch(`http://localhost:3001/external-orders`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ const Orders = () => {
   const askForTheSame = async (orderId) => {
     setLoading2(false)
     try {
-      const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}`, {
+      const response = await fetch(`http://localhost:3001/orders/${orderId}`, {
         headers: {
           Authorization: `Bearer ${cookies.token}`,
         },
@@ -129,7 +129,7 @@ const Orders = () => {
   
         console.log(order);
   
-      const placedOrder=  await fetch('https://asac-orders-system.onrender.com/orders', {
+      const placedOrder=  await fetch('http://localhost:3001/orders', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ const Orders = () => {
 
   const handleApprove = async (orderId) => {
     try {
-      const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}/approve`, {
+      const response = await fetch(`http://localhost:3001/orders/${orderId}/approve`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ const Orders = () => {
 
   const handleViewOrder = async (orderId) => {
     try {
-      const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}`, {
+      const response = await fetch(`http://localhost:3001/orders/${orderId}`, {
         headers: {
           Authorization: `Bearer ${cookies.token}`,
         },
