@@ -24,7 +24,8 @@ const Signup = () => {
       if (response.ok) {
         navigate('/signin'); // Navigate to the signin page
       } else {
-        alert(response);
+        const responseData = await response.json();
+        alert(responseData.message);
       }
     } catch (error) {
       console.log(error);

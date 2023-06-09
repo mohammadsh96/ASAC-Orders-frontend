@@ -28,7 +28,7 @@ const Orders = () => {
       setOrders(data);
       const filteredOrders = data.filter((item) => item.food !== "I am Good");
       setOrders2(filteredOrders);
-      
+
       setLoading(false);
 
       const response2 = await fetch('https://asac-orders-system.onrender.com/external-orders');
@@ -82,32 +82,81 @@ const Orders = () => {
   const handleEdit = async (orderId) => {
     navigate(`/orders/${orderId}/edit`);
   };
-//update external orders : 
-const setExternalOrdersFun = async(e)=>{
- e.preventDefault()
-  console.log(externalOrders);
-  console.log(typeof externalOrders);
-  try {
-    const response = await fetch(`https://asac-orders-system.onrender.com/external-orders`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      
-      },
-      body: JSON.stringify({increment:parseInt(externalOrders) }),
-    });
-   if(response.ok){
-    // const responseData = await response.json();
-    // console.log(responseData.numberOfExternalOrders);  
-    // setExternalOrders(parseInt(responseData.numberOfExternalOrders))
-   }
-  } catch (error) {
-    console.log(error);
-  } 
-  finally {
-    setLoading(false);
+  //update external orders : 
+  const setExternalOrdersFun = async (e) => {
+    e.preventDefault()
+    console.log(externalOrders);
+    console.log(typeof externalOrders);
+    try {
+      const response = await fetch(`https://asac-orders-system.onrender.com/external-orders`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+
+        },
+        body: JSON.stringify({ increment: parseInt(externalOrders) }),
+      });
+      if (response.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: `adding ${externalOrders} external Orders`,
+          text: 'successfully!',
+        });
+        // const responseData = await response.json();
+        // console.log(responseData.numberOfExternalOrders);  
+        // setExternalOrders(parseInt(responseData.numberOfExternalOrders))
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+      setLoading(false);
+    }
   }
-}
+  const askForTheSame = async (orderId) => {
+    try {
+      const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${cookies.token}`,
+        },
+      });
+  
+      if (response.ok) {
+        const order = await response.json();
+  
+        console.log(order);
+  
+      const placedOrder=  await fetch('https://asac-orders-system.onrender.com/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${cookies.token}`,
+          },
+          body: JSON.stringify({
+            food: order.food,
+            quantity: 1,
+            price: order.price,
+          }),
+        });
+  if (placedOrder.ok) {
+    fetchOrders()
+  }else{
+    Swal.fire({
+      icon: 'error',
+      title: `Cannot add the same order`,
+      text: 'danger!',
+    });
+  }
+        // Additional logic if needed
+      } else {
+        // Handle error response
+      }
+    } catch (error) {
+      // Handle fetch or JSON parsing error
+    }
+  };
+  
+
   const handleApprove = async (orderId) => {
     try {
       const response = await fetch(`https://asac-orders-system.onrender.com/orders/${orderId}/approve`, {
@@ -174,186 +223,185 @@ const setExternalOrdersFun = async(e)=>{
     }
   };
 
- // Calculate total price for all orders
-let totalOrderPrice, totalUnpaidPrice, totalPaidPrice, totalNumOrders, unitPrice, remainingPrice = 0;
-if (orders.length) {
-  totalOrderPrice = orders.reduce((total, order) => total + parseFloat(order.price), 0);
+  // Calculate total price for all orders
+  let totalOrderPrice, totalUnpaidPrice, totalPaidPrice, totalNumOrders, unitPrice, remainingPrice = 0;
+  if (orders.length) {
+    totalOrderPrice = orders.reduce((total, order) => total + parseFloat(order.price), 0);
 
-  // Calculate total unpaid price
-  totalUnpaidPrice = orders
-    .filter((order) => order.paymentStatus !== 'Paid')
-    .reduce((total, order) => total + parseFloat(order.price), 0);
+    // Calculate total unpaid price
+    totalUnpaidPrice = orders
+      .filter((order) => order.paymentStatus !== 'Paid')
+      .reduce((total, order) => total + parseFloat(order.price), 0);
 
-  // Calculate total paid price
-  totalPaidPrice = orders
-    .filter((order) => order.paymentStatus === 'Paid')
-    .reduce((total, order) => total + parseFloat(order.price), 0);
+    // Calculate total paid price
+    totalPaidPrice = orders
+      .filter((order) => order.paymentStatus === 'Paid')
+      .reduce((total, order) => total + parseFloat(order.price), 0);
 
-  // Calculate total number of orders
-  totalNumOrders = orders2.length + Number(externalOrders);
-  // Calculate unit price for dividing among orders
-  const incrementValues = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00, 2.00,2.00,2.00];
-  
-  let incrementIndex = (2 / totalNumOrders) 
+    // Calculate total number of orders
+    totalNumOrders = orders2.length + Number(externalOrders);
+    // Calculate unit price for dividing among orders
+    const incrementValues = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00, 2.00, 2.00, 2.00];
 
-  for (let i = 0; i < incrementValues.length; i++) {
+    let incrementIndex = (2 / totalNumOrders)
 
-      if(incrementIndex >= incrementValues[i] && incrementIndex < incrementValues[i+1] ){
-if(incrementIndex === incrementValues[i] ){
+    for (let i = 0; i < incrementValues.length; i++) {
 
-  incrementIndex =incrementValues[i]
-}else{
-  incrementIndex =incrementValues[i+1]
+      if (incrementIndex >= incrementValues[i] && incrementIndex < incrementValues[i + 1]) {
+        if (incrementIndex === incrementValues[i]) {
 
-}
+          incrementIndex = incrementValues[i]
+        } else {
+          incrementIndex = incrementValues[i + 1]
+
+        }
         break;
       }
-    
-    
-  }
 
-  // const closestIncrement = incrementValues[incrementIndex];
-  const remainingUnits = 2 - (incrementIndex * totalNumOrders);
 
-  // unitPrice = remainingUnits / totalNumOrders;
-  // remainingPrice = (remainingUnits * totalOrderPrice) / totalNumOrders;
+    }
 
-  // const getOrderPriceWithUnitPrice = (order) => {
-  //   const orderPrice = parseFloat(order.price);
-  //   return (orderPrice + unitPrice + closestIncrement).toFixed(2);
-  // };
+    // const closestIncrement = incrementValues[incrementIndex];
+    const remainingUnits = 2 - (incrementIndex * totalNumOrders);
 
-  return (
-    <div className="orders-container">
-      <br></br>
-      <br></br>
-      {loading ? (
-        <div className="loading-spinner"></div>
-      ) : (
-        <table className="orders-table">
+    // unitPrice = remainingUnits / totalNumOrders;
+    // remainingPrice = (remainingUnits * totalOrderPrice) / totalNumOrders;
+
+    // const getOrderPriceWithUnitPrice = (order) => {
+    //   const orderPrice = parseFloat(order.price);
+    //   return (orderPrice + unitPrice + closestIncrement).toFixed(2);
+    // };
+
+    return (
+      <div className="orders-container">
+        <br />
+        <br />
+        {loading ? (
+          <div className="loading-spinner"></div>
+        ) : (
+          <>
+          <table className="orders-table">
           <thead>
             <tr>
               <th>Name</th>
               <th>Food</th>
-              {/* <th>Quantity</th> */}
               <th>Price</th>
-              <th>Payment Status</th>
-              <th>Payment Received</th>
-              <th>Actions</th>
+              { cookies.user &&
+              <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
               <tr key={order._id} className={order.approved ? 'approved' : 'unapproved'}>
                 <td>{order.name}</td>
-                <td id='food-name'>{order.food}</td>
-                {/* <td>{order.quantity}</td> */}
-                {order.food==="I am Good" ? <td>{order.price}</td> : <td>{(order.price + incrementIndex).toFixed(2)}</td>}
-                
-                <td className={order.paymentStatus === 'Paid' ? 'paid' : 'unpaid'}>
-                  {order.paymentStatus}
-                </td>
-                <td>
-                  {order.paymentStatus === 'Paid' && order.approved ? (
-                    'Yes'
-                  ) : (
-                    <button onClick={() => handleApprove(order._id)}>Approve</button>
-                  )}
-                </td>
-                <td>
-                  {cookies.user && order.userId === cookies.user._id && (
+                <td id="food-name">{order.food}</td>
+                {order.food === "I am Good" ? (
+                  <td>{order.price}</td>
+                ) : (
+                  <td>{(order.price + incrementIndex).toFixed(2)}</td>
+                )}
+               { cookies.user && <td>
+                  {cookies.user && order.userId === cookies.user._id ? (
                     <>
-                      {/* {cookies.user.email === 'mhmd.shrydh1996@gmail.com' && (
-                        <button onClick={() => handleViewOrder(order._id)}>View</button>
-                      )} */}
-                      <button onClick={() => handleEdit(order._id)}>Pay</button>
                       <button onClick={() => handleDelete(order._id)}>Delete</button>
                     </>
-                  )}
-                </td>
+                  ):<>   <button onClick={() => askForTheSame(order._id)}>ask for the same</button></>}
+                </td>}
+                
               </tr>
             ))}
-            <tr>
-              <td colSpan="4" className="total-label">
-                Total Order Price:
-              </td>
-              <td colSpan="3" className="total-value">
-                {totalOrderPrice.toFixed(2)} JD
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="4" className="total-label">
-                Total Unpaid Price:
-              </td>
-              <td colSpan="3" className="total-value">
-                {totalUnpaidPrice.toFixed(2)} JD
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="4" className="total-label">
-                Total Paid Price:
-              </td>
-              <td colSpan="3" className="total-value">
-                {totalPaidPrice.toFixed(2)} JD
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="4" className="total-label">
-                Total Number of ASAC Orders:
-              </td>
-              <td colSpan="3" className="total-value">
-                {totalNumOrders-externalOrders}
-              </td>
-            </tr>
-            <tr>
-  <td colSpan="4" className="total-label">
-    Delivery Calculation:
-  </td>
-  <td colSpan="3" className="total-value">
-    {incrementIndex} JD for each order + Remaining balance :{remainingUnits.toFixed(2) === '-0.05' ? <span> شلن </span> :
-    <>
-    {remainingUnits.toFixed(2) === '-0.10' ? <span> بريزه </span>: <span>{remainingUnits.toFixed(2)*-1} JD</span>} 
-    
-    </>} 
-  </td>
-</tr>
-
-
-           
-{cookies.user && cookies.user.email ==='mhmd.shrydh1996@gmail.com' ?<tr>
-  <td colSpan="4" className="total-label">How many external Orders? </td>
-  <td colSpan="4" className="total-label">
-    <form onSubmit={setExternalOrdersFun} style={{ display: 'flex', alignItems: 'center' }}>
-      <input
-        type="number"
-        value={externalOrders}
-        onChange={(e) => {
-          const value = e.target.value;
-          setExternalOrders(value ? parseInt(value) : 0); // Set to empty string if value is empty
-        }}
-        placeholder="Enter number of external orders"
-        style={{ marginRight: '10px' }}
-      />
-      <button type="submit" style={{ padding: '5px 10px' }}>SAVE</button>
-    </form>
-  </td>
-</tr>
-: <></>}
-
-<tr>
-  <td colSpan="4" className="total-label">
-    Total Number of Orders:
-  </td>
-  <td colSpan="3" className="total-value">
-    {totalNumOrders}  
-  </td>
-</tr>
           </tbody>
-     
         </table>
-      )}
-    </div>
-  );
-};
+    
+            <table className="totals-table" style={{ width: "80%", marginTop: "20px" }}>
+              <tbody>
+                <tr>
+                  <td colSpan="2" className="total-label">
+                    Total Order Price:
+                  </td>
+                  <td colSpan="2" className="total-value">
+                    {totalOrderPrice.toFixed(2)} JD
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="2" className="total-label">
+                    Total Unpaid Price:
+                  </td>
+                  <td colSpan="2" className="total-value">
+                    {totalUnpaidPrice.toFixed(2)} JD
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="2" className="total-label">
+                    Total Paid Price:
+                  </td>
+                  <td colSpan="2" className="total-value">
+                    {totalPaidPrice.toFixed(2)} JD
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="2" className="total-label">
+                    Total Number of ASAC Orders:
+                  </td>
+                  <td colSpan="2" className="total-value">
+                    {totalNumOrders - externalOrders}
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="2" className="total-label">
+                    Delivery Calculation:
+                  </td>
+                  <td colSpan="2" className="total-value">
+                    {incrementIndex} JD for each order + Remaining balance:{" "}
+                    {remainingUnits.toFixed(2) === "-0.05" ? (
+                      <span>شلن</span>
+                    ) : remainingUnits.toFixed(2) === "-0.10" ? (
+                      <span>بريزه</span>
+                    ) : (
+                      <span>{remainingUnits.toFixed(2) * -1} JD</span>
+                    )}
+                  </td>
+                </tr>
+                {cookies.user && cookies.user.email === "mhmd.shrydh1996@gmail.com" && (
+                  <tr>
+                    <td colSpan="2" className="total-label">
+                      How many external Orders?
+                    </td>
+                    <td colSpan="2" className="total-label">
+                      <form onSubmit={setExternalOrdersFun} style={{ display: "flex", alignItems: "center" }}>
+                        <input
+                          type="number"
+                          
+                          onChange={(e) => {
+                            const value = e.target.value;
+                            setExternalOrders(value ? parseInt(value) : 0); // Set to empty string if value is empty
+                          }}
+                          placeholder="Enter number of external orders"
+                          style={{ marginRight: "10px" }}
+                        />
+                        <button type="submit" style={{ padding: "5px 10px" }}>
+                          SAVE
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                )}
+                <tr>
+                  <td colSpan="2" className="total-label">
+                    Total Number of Orders:
+                  </td>
+                  <td colSpan="2" className="total-value">
+                    {totalNumOrders}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </>
+        )}
+      </div>
+    );
+    
+    ;
+  };
 }
 export default Orders;
