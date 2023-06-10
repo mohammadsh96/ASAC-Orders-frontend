@@ -334,25 +334,25 @@ const Orders = () => {
                     Total Order Price:
                   </td>
                   <td colSpan="2" className="total-value">
-                    {totalOrderPrice.toFixed(2)} JD
+                    {(totalOrderPrice+2).toFixed(2)} JD
                   </td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td colSpan="2" className="total-label">
                     Total Unpaid Price:
                   </td>
                   <td colSpan="2" className="total-value">
                     {totalUnpaidPrice.toFixed(2)} JD
                   </td>
-                </tr>
-                <tr>
+                </tr> */}
+                {/* <tr>
                   <td colSpan="2" className="total-label">
                     Total Paid Price:
                   </td>
                   <td colSpan="2" className="total-value">
                     {totalPaidPrice.toFixed(2)} JD
                   </td>
-                </tr>
+                </tr> */}
                 <tr>
                   <td colSpan="2" className="total-label">
                     Total Number of ASAC Orders:
@@ -376,6 +376,14 @@ const Orders = () => {
                     )}
                   </td>
                 </tr>
+                <tr>
+                  <td colSpan="2" className="total-label">
+                    Total Number of Orders:
+                  </td>
+                  <td colSpan="2" className="total-value">
+                    {totalNumOrders}
+                  </td>
+                </tr>
                 {cookies.user && cookies.user.email === "mhmd.shrydh1996@gmail.com" && (
                   <tr>
                     <td colSpan="2" className="total-label">
@@ -391,23 +399,15 @@ const Orders = () => {
                             setExternalOrders(value ? parseInt(value) : 0); // Set to empty string if value is empty
                           }}
                           placeholder="Enter number of external orders"
-                          style={{ marginRight: "10px" }}
+                          
                         />
-                        <button type="submit" style={{ padding: "5px 10px" }}>
+                        <button type="submit" >
                           SAVE
                         </button>
                       </form>
                     </td>
                   </tr>
                 )}
-                <tr>
-                  <td colSpan="2" className="total-label">
-                    Total Number of Orders:
-                  </td>
-                  <td colSpan="2" className="total-value">
-                    {totalNumOrders}
-                  </td>
-                </tr>
               </tbody>
             </table>
           </>

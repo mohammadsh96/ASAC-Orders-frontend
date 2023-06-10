@@ -50,13 +50,14 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h3 className="home-heading">ASAC Irbid Team Orders</h3>
+      <h5 className="home-heading">ASAC Irbid Team Orders</h5>
+
       <nav className='main-nav'>
         <ul className="nav-links">
           {(cookies.token === '' || cookies.token === undefined )&& (
             <li>
               <button className="nav-link-button">
-                <Link to="/place-order">Place Order ➕</Link>
+                <Link to="/place-order">Place Order </Link>
               </button>
             </li>
           )}
@@ -65,7 +66,7 @@ const Home = () => {
             <div id='margin-buttons'>
               <li>
                 <button className="nav-link-button">
-                  <Link to="/place-order">Place Order ➕</Link>
+                  <Link to="/place-order">Place Order </Link>
                 </button>
               </li>
               <li>

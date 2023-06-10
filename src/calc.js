@@ -27,13 +27,14 @@ const SendCalculations = () => {
   }
 
   return (
-     <button className='nav-link-button' id='minmise' 
+    <div id='minmise'>
+     <button className='nav-link-button'  
     onClick={handleSendCalculations}
   
   >
-    Send Calculations
+    Calculate
   </button>
-    
+  </div>
   );
 };
 
