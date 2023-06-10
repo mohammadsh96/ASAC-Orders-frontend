@@ -5,12 +5,14 @@
   
   .home-heading {
     font-family: 'Roboto', sans-serif;
-    font-size: 32px;
+    font-size: 20px;
     color: #ee7724;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 1px 1px 14px #b44593;
+    text-shadow: 1px 1px 1px #b44593;
     
+    height:0px;
+    margin-top: 10px;
   }
   .main-nav{
     display: flex;
@@ -35,19 +37,18 @@
   
   .nav-link-button {
     background-color: #ff5555;
-    border: 2px double  #fbfbfb;
-    box-shadow: 2px 2px 8px white;
+    border: 1px solid  #000000;
+    box-shadow: 1px 1px 4px rgb(0, 0, 0);
     padding: 10px 20px;
     font-weight: bold;
     cursor: pointer;
-    height: fit-content;
-    width: fit-content;
+    
   }
 
   #margin-buttons{
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
   }
   a {
     text-decoration: none;
@@ -60,10 +61,10 @@
   
   .signout-button {
     background-color: #ff5555;
-    border: 2px solid  #fbfbfb;
-    box-shadow: 2px 2px 8px white;
+    border: 2px solid  #000000;
+    border-radius: 4px;
+    box-shadow: 1px 1px 4px rgb(0, 0, 0);
     padding: 5px 10px;
-    background-color: #ee7724;
     background-image: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
     color: white;
     cursor: pointer;
@@ -101,9 +102,11 @@
       font: 2em sans-serif;
       align-self: center;
     }
-#minmise{
-  font-size: 6px;
-  width: 100%;
+
+#minmise button{
+  font-size: 8px;
+ padding: 4px;
+  
 }
   }
   

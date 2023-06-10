@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import './signin.css';
+import './signup.css';
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -60,12 +61,11 @@ const Signin = () => {
     <div className="signin-container">
       <div className="signin-content">
         <div className='signin-form'>
+           <h5 className="text-center"> Login  </h5>
           {error && <p className="error-message">{error}</p>}
           <form className="gradient-form signin-form" onSubmit={handleSignin}>
-            <div className="d-flex flex-column ms-5">
-              <div className="text-center">
-                <h4 className="mt-1 mb-5 pb-1">Welcome to ASAC Irbid Team</h4>
-              </div>
+            <div className="signup-form">
+              
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <div className="mb-4">
