@@ -59,7 +59,7 @@ const Signin = () => {
 
   return (
     <div className="signin-container">
-      <div className="signin-content">
+       <div className="signin-content">
         <div className='signin-form'>
            <h5 className="text-center"> Login  </h5>
           {error && <p className="error-message">{error}</p>}

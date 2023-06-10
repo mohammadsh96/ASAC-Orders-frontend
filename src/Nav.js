@@ -4,6 +4,7 @@ import './nav.css';
 
 const NavBar = () => {
   return (
+    
     <nav>
       <img src='https://saraaltayeh.github.io/about-us-asac/assets/asac-logo.jpg' alt="ASAC Logo" className="logo" />
       <ul className="nav-links1">
