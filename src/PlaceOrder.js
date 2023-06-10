@@ -165,7 +165,7 @@ if(!signedIn.token){
       <div className="signin-content">
       <form  onSubmit={handlePlaceOrder}>
       <div className="text-center">
-        <h5 className="form-heading">Select & Enjoy Your Meal</h5>
+        <h5 className="form-heading">Select & Enjoy </h5>
         </div>
         
         <div className="food-select-flex">
