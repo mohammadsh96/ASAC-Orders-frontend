@@ -15,15 +15,23 @@
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
     "sweetalert2": "^11.7.10",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "workbox-sw": "^7.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "precache": "workbox injectManifest --config public/workbox-config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    
+      "globals": {
+        "self": "readonly"
+      },
+    
+    
     "extends": [
       "react-app",
       "react-app/jest"
