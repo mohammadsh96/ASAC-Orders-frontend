@@ -12,6 +12,7 @@ import Footer from './Footer';
 // import AppAvailability from './AppAvailability ';
 
 const App = () => {
+ 
   return (
     <>
     
