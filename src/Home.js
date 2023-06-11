@@ -6,6 +6,7 @@ import Orders from './Orders';
 import Swal from 'sweetalert2';
 import SendCalculations from './calc';
 import './home.css';
+// import {   FaDoorClose} from 'react-icons/fa';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -82,7 +83,7 @@ const Home = () => {
         </ul>
         {cookies.token !== '' && cookies.token !== undefined &&(
           <button className="signout-button" onClick={handleSignout}>
-            Sign Out
+            Sign Out 
           </button>
         )}
       </nav>

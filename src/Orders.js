@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import './Orders.css';
 import Swal from 'sweetalert2';
-
+import {  FaTrash} from 'react-icons/fa'
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [orders2, setOrders2] = useState([]);
@@ -314,8 +314,8 @@ const Orders = () => {
                 )}
                { cookies.user && <td>
                   {cookies.user && order.userId === cookies.user._id ? (
-                    <>
-                      <button onClick={() => handleDelete(order._id)}>Delete</button>
+                    <> 
+                      <button onClick={() => handleDelete(order._id)}>Delete <FaTrash/></button>
                     </>
                   ):<> {loading2?<button onClick={() => askForTheSame(order._id)}>same same  </button> : <div className="loading-spinner2"></div> }  </>}
                 </td>   }
