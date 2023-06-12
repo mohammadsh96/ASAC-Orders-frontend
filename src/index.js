@@ -5,14 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // src/index.js
 
-import * as serviceWorker from './service-worker';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
-serviceWorker.register();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
