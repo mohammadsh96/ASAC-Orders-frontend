@@ -19,9 +19,9 @@ const AppAvailability = ({ children }) => {
 
       // Check if the current time is within the allowed hours (10:00am to 12:30pm)
       if (
-        (currentHour === 10 && currentMinute >= 0) ||
-        (currentHour > 10 && currentHour < 12) ||
-        (currentHour === 12 && currentMinute <= 30)
+        (currentHour === 3 && currentMinute >= 0) ||
+        (currentHour > 3 && currentHour < 5) ||
+        (currentHour === 5 && currentMinute <= 30)
       ) {
         setIsAppOpen(true);
       } else {
@@ -56,10 +56,10 @@ const AppAvailability = ({ children }) => {
         <div className="closed-container">
             <div className="closed-container-inner">
           <h1 className="closed-heading">Oops, the app is closed!</h1>
-          <p className="closed-text">But don't worry, we'll be back Tomorrow  at {appOpensAt} am with more fun and excitement!</p>
+          {/* <p className="closed-text">But don't worry, we'll be back Tomorrow  at {appOpensAt} am with more fun and excitement!</p> */}
           <p className="current-time">Current Time: <span> {currentTime.toLocaleTimeString()}</span></p>
-          <p className="time-remaining">Time Remaining until App Opens:<span> {timeRemaining}</span></p>
-          {/* <img src={closed} alt="closed" className="closed-image" /> */}
+          {/* <p className="time-remaining">Time Remaining until App Opens:<span> {timeRemaining}</span></p> */}
+          <img src={closed} alt="closed" className="closed-image" />
           </div>
         </div>
       )}
