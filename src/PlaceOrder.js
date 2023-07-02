@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { menu,additions,drinks } from './menu';
+import { menu,additions,drinks,drinksYaman,dishes } from './menu';
 import './placeOrder.css';
+import axios from 'axios';
 
 const PlaceOrder = () => {
   const [food, setFood] = useState('');
@@ -15,7 +16,10 @@ const PlaceOrder = () => {
   const [orders, setOrders] = useState([]);
   const [selectedFoods, setSelectedFoods] = useState([]);
 const [signedIn] =useCookies(['token'])
-console.log(signedIn);
+const [menudb] = useState(cookies.menu);
+
+// console.log(menudb);
+// console.log(signedIn);
 if(!signedIn.token){
   Swal.fire({
     icon: 'warning',
@@ -25,6 +29,8 @@ if(!signedIn.token){
   });
   
 }
+
+
   useEffect(() => {
     const savedOrders = JSON.parse(localStorage.getItem('orders'));
     if (savedOrders && savedOrders.length) {
@@ -125,13 +131,22 @@ if(!signedIn.token){
   const handleFoodChange = (e) => {
     const selectedFood = e.target.value;
     setFood(selectedFood);
-  
+  if (menudb==='arab') {
     const selectedFoodItem = menu.find((item) => item.name === selectedFood);
     if (selectedFoodItem) {
       setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
       setFood('');
       setPrice(0);
     }
+  }else{
+    const selectedFoodItem = dishes.find((item) => item.name === selectedFood);
+    if (selectedFoodItem) {
+      setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
+      setFood('');
+      setPrice(0);
+    }
+  }
+  
   };
   
   const handleFoodChange1 = (e) => {
@@ -149,14 +164,24 @@ if(!signedIn.token){
   const handleFoodChange2 = (e) => {
     const selectedFood = e.target.value;
     setFood(selectedFood);
+    if(menudb==='arab'){
+      const selectedFoodItem = drinks.find((item) => item.name === selectedFood);
+      if (selectedFoodItem) {
+        setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
+        setFood('');
+        setPrice(0);
+      }
+    }else{
+      const selectedFoodItem = drinksYaman.find((item) => item.name === selectedFood);
+      if (selectedFoodItem) {
+        setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
+        setFood('');
+        setPrice(0);
+      }
+    };
+  }
   
-    const selectedFoodItem = drinks.find((item) => item.name === selectedFood);
-    if (selectedFoodItem) {
-      setSelectedFoods((prevFoods) => [...prevFoods, selectedFoodItem]);
-      setFood('');
-      setPrice(0);
-    }
-  };
+  
   const handleRemoveFood2 = (name) => {
     setSelectedFoods((prevFoods) => prevFoods.filter((food) => food.name !== name));
   };
@@ -171,27 +196,38 @@ if(!signedIn.token){
         <div className="food-select-flex">
           <select className="food-select" value={food} onChange={handleFoodChange}>
             <option value="">Select Meal</option>
-            {menu.map((item) => (
+            { menudb==='arab' && menu.map((item) => (
               <option key={item.name} value={item.name}>
                 {item.name}
               </option>
-            ))}
+            )) }
+          { menudb==='yaman' && dishes.map((item) => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            )) }
           </select>
         </div>
         <div className="food-select-flex">
-          <select className="food-select" value={food} onChange={handleFoodChange1}>
+        {menudb==='arab' &&  <select className="food-select" value={food} onChange={handleFoodChange1}>
             <option value="">Select additions</option>
-            {additions.map((item) => (
+            {menudb==='arab' && additions.map((item) => (
               <option key={item.name} value={item.name}>
                 {item.name}
               </option>
             ))}
-          </select>
+          </select>}
         </div>
         <div className="food-select-flex">
           <select className="food-select" value={food} onChange={handleFoodChange2}>
-            <option value="">Select drink</option>
-            {drinks.map((item) => (
+          {menudb==='arab' &&   <option value="">Select drink</option>}
+          {menudb==='yaman' &&   <option value="">Select drink & additions</option>}
+            {menudb==='yaman' && drinksYaman.map((item) => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+            {menudb==='arab' && drinks.map((item) => (
               <option key={item.name} value={item.name}>
                 {item.name}
               </option>
