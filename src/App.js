@@ -9,6 +9,7 @@ import NavBar from './Nav';
 import EditForm from './EditForm';
 import AboutUs from './aboutUs';
 import Footer from './Footer';
+// import NotificationComponent from './noty';
 // import AppAvailability from './AppAvailability ';
 
 const App = () => {
@@ -18,7 +19,7 @@ const App = () => {
     
     <Router>
     <NavBar/>
-    
+    {/* <NotificationComponent/> */}
     {/* <AppAvailability> */}
       <Routes>
 

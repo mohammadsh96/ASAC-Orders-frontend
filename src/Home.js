@@ -1,23 +1,83 @@
-import React from 'react';
+import React,{useState ,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import Orders from './Orders';
 import Swal from 'sweetalert2';
 import SendCalculations from './calc';
+import axios from 'axios';
 import './home.css';
-// import {   FaDoorClose} from 'react-icons/fa';
+import NotificationComponent from './noty.js';
+import socket from './socket';
+
+// const socket = io('https://asac-orders-system.onrender.com/')
 
 const Home = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['token']);
+  const [cookies, setCookie] = useCookies(['token' ,'menu']);
+  useEffect(() => {
+    getMenu() 
+    },[])
 
+    const handleOrderSend = async () => {
+      let data = {
+        msg: 'hhiii',
+        id: 1
+      };
+    
+      try {
+        await axios.post('https://asac-orders-system.onrender.com/send-order', data);
+        console.log('Order sent successfully');
+      } catch (error) {
+        console.log('Error sending order:', error);
+      }
+    };
+
+// Listen for the 'queuedNotifications' event
+// socket.on('queuedNotifications', (notifications) => {
+//   console.log('Received queued notifications:', notifications);
+//   // Display the missed messages to the user
+//   notifications.forEach((notification) => {
+//     console.log('Missed notification:', notification.msg);
+//     // Add your logic here to display the missed messages to the user
+//   });
+// });
+
+// // Optional: Listen for other events from the server
+// socket.on('notification', (notification) => {
+//   console.log('Received notification:', notification);
+// });
+
+// // Optional: Handle disconnection
+// socket.on('disconnect', () => {
+//   console.log('Disconnected from the server');
+// });
+
+ 
+    async function getMenu(){
+     await axios.get('https://asac-orders-system.onrender.com/menu').then((result)=>{
+      setCookie('menu',result.data[0].name)
+      // console.log(result.data[0].name);
+     })
+    }
   const handleSignout = () => {
     setCookie('token', '', { path: '/' });
     setCookie('user', '', { path: '/' });
     navigate('/');
   };
+  const handleSetMenu = async ()=>{
+    let name;
+    if(cookies.menu==='arab'){
+      name ='yaman'
+    }else{
+      name='arab'
+    }
+    await axios.put('https://asac-orders-system.onrender.com/menu',{name})
+    .then(()=>{
+      getMenu()
 
+    })
+  }
   const handleClearAllOrders = async () => {
     try {
       const response = await fetch('https://asac-orders-system.onrender.com/orders/clear/all', {
@@ -34,7 +94,7 @@ const Home = () => {
             title: 'Orders Cleared',
             text: 'successfully!',
           });
-        // Orders cleared successfully, perform any additional actions if needed
+      
         navigate('/place-order');
       } else {
         Swal.fire({
@@ -52,7 +112,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <h5 className="home-heading">ASAC Irbid Team Orders</h5>
-
+ {/* <button onClick={handleOrderSend}>Send Order</button> */}
       <nav className='main-nav'>
         <ul className="nav-links">
           {(cookies.token === '' || cookies.token === undefined )&& (
@@ -71,9 +131,13 @@ const Home = () => {
                 </button>
               </li>
               <li>
-              {cookies.user.email === 'mhmd.shrydh1996@gmail.com' &&(<button className="nav-link-button" onClick={handleClearAllOrders}>
+              {cookies.user.email === 'mhmd.shrydh1996@gmail.com' &&(<><button className="nav-link-button" onClick={handleClearAllOrders}>
                   Clear All Orders
-                </button>)}
+                </button>
+                <button className="nav-link-button" onClick={handleSetMenu}>
+                  Set Menu
+                </button></>)}
+
                 
               </li>
 <SendCalculations/>
@@ -83,7 +147,7 @@ const Home = () => {
         </ul>
         {cookies.token !== '' && cookies.token !== undefined &&(
           <button className="signout-button" onClick={handleSignout}>
-            Sign Out 
+            Log Out 
           </button>
         )}
       </nav>
