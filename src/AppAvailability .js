@@ -42,7 +42,6 @@ const AppAvailability = ({ children }) => {
         <div className="closed-container">
           <div className="closed-container-inner">
             <h1 className="closed-heading">Sorry, the app is closed!</h1>
-            <p>تم الطلب و الارودر عالطريق </p>
             <p className="current-time">Current Time: <span>{currentTime.toLocaleTimeString()}</span></p>
             <img src={closed} alt="closed" className="closed-image" />
           </div>
