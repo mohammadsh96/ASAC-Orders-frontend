@@ -20,7 +20,7 @@ const App = () => {
     <Router>
     <NavBar/>
     {/* <NotificationComponent/> */}
-    <AppAvailability>
+    {/* <AppAvailability> */}
       <Routes>
 
       <Route path="/" element={<Home />} />
@@ -33,7 +33,7 @@ const App = () => {
 
        
       </Routes>
-      </AppAvailability>
+      {/* </AppAvailability> */}
     <Footer/>
     </Router>
     </>

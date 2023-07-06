@@ -19,7 +19,7 @@ const AppAvailability = ({ children }) => {
       if (
         (currentHour === 10 && currentMinute >= 0) ||
         (currentHour > 10 && currentHour < 12) ||
-        (currentHour === 12 && currentMinute < 30)
+        (currentHour === 12 && currentMinute < 50)
       ) {
         setIsAppOpen(true);
       } else {
