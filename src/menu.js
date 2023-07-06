@@ -77,6 +77,7 @@ export const menu = [
   { name: 'فاهيتا وجبه', price: '3.25' },
   { name: 'فاهيتا ساندوش', price: '2.00' },
   { name: 'بطاطا فرايز', price: '1.00' },
+  { name: 'سلطة معكرونه ', price: '1.00' },
   { name: ' زعتر', price: '0.50' },
   { name: 'زعتر وجبنه', price: '0.75' },
   { name: 'مكس اجبان', price: '1.00' },
