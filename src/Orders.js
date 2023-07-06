@@ -271,7 +271,7 @@ const Orders = () => {
     }
 
     // const closestIncrement = incrementValues[incrementIndex];
-    const remainingUnits = 2 - (incrementIndex * totalNumOrders);
+    const remainingUnits = 2.5 - (incrementIndex * totalNumOrders);
 
     // unitPrice = remainingUnits / totalNumOrders;
     // remainingPrice = (remainingUnits * totalOrderPrice) / totalNumOrders;
