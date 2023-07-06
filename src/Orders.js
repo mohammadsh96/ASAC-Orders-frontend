@@ -20,7 +20,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('https://asac-orders-system.onrender.com/orders', {
+      const response = await fetch('https://asac-orders-system.onrender.com/orders-last-24-hours', {
         headers: {
           Authorization: `Bearer ${cookies.token}`,
         },
