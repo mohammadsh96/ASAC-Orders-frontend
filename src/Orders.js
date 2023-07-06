@@ -334,7 +334,7 @@ const Orders = () => {
                     Total Order Price:
                   </td>
                   <td colSpan="2" className="total-value">
-                    {(totalOrderPrice+2).toFixed(2)} JD
+                    {(totalOrderPrice+2.5).toFixed(2)} JD
                   </td>
                 </tr>
                 {/* <tr>
