@@ -101,6 +101,8 @@
     .signout-button{
       font: 2em sans-serif;
       align-self: center;
+      font-size: 8px;
+ padding: 4px;
     }
 
 #minmise button{
