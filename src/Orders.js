@@ -304,7 +304,7 @@ const Orders = () => {
           </thead>
           <tbody>
             {orders.map((order) => (
-              <tr key={order._id} className={order.approved ? 'approved' : 'unapproved'}>
+              <tr id={cookies.user && order.userId === cookies.user._id? 'mark-order' : '' } key={order._id} className={order.approved ? 'approved' : 'unapproved'}>
                 <td>{order.name}</td>
                 <td id="food-name">{order.food}</td>
                 {order.food === "I am Good" ? (

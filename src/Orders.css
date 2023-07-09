@@ -63,7 +63,9 @@
   background-color: #ffffff;
   color: #56c109;
 }
-
+#mark-order{
+  background-color: #56c10981;
+}
 .orders-table button,
 .totals-table button {
   padding: 6px 10px;
