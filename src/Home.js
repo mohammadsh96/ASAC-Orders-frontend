@@ -145,11 +145,7 @@ const Home = () => {
             </div>
           )}
         </ul>
-        {cookies.token !== '' && cookies.token !== undefined &&(
-          <button className="signout-button" onClick={handleSignout}>
-            Log Out 
-          </button>
-        )}
+       
       </nav>
       <Orders />
     </div>
