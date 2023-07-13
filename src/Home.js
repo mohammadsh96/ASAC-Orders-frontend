@@ -126,9 +126,12 @@ const Home = () => {
           {cookies.token !== '' && cookies.token !== undefined &&(
             <div id='margin-buttons'>
               <li>
-             {cookies.user.email === 'mhmd.shrydh1996@gmail.com' ? <button className="nav-link-button">
+              <button className="nav-link-button">
                   <Link to="/place-order">Place Order </Link>
-                </button> : <><h3 style={{'color':'white'}}>Sorry We don't Accept new Orders for Today 🛎️👋</h3></>}  
+                </button>
+             {/* {cookies.user.email === 'mhmd.shrydh1996@gmail.com' ? <button className="nav-link-button">
+                  <Link to="/place-order">Place Order </Link>
+                </button> : <><h3 style={{'color':'white'}}>Sorry We don't Accept new Orders for Today 🛎️👋</h3></>}   */}
               </li>
               <li>
               {cookies.user.email === 'mhmd.shrydh1996@gmail.com' &&(<><button className="nav-link-button" onClick={handleClearAllOrders}>
