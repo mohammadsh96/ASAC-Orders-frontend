@@ -1,4 +1,4 @@
-import React,{useState ,useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -7,80 +7,98 @@ import Swal from 'sweetalert2';
 import SendCalculations from './calc';
 import axios from 'axios';
 import './home.css';
-import NotificationComponent from './noty.js';
 import socket from './socket';
-
-// const socket = io('https://asac-orders-system.onrender.com/')
+import NotificationIcon from './NotificationIcon';
 
 const Home = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['token' ,'menu']);
+  const [cookies, setCookie] = useCookies(['token', 'menu']);
+  const [orderMessage, setOrderMessage] = useState('');
+  const [notifications, setNotifications] = useState([]);
+  const [notificationCount, setNotificationCount] = useState(0);
+  const socketRef = useRef(null);
+ 
   useEffect(() => {
-    getMenu() 
-    },[])
-
-    const handleOrderSend = async () => {
-      let data = {
-        msg: 'hhiii',
-        id: 1
-      };
-    
-      try {
-        await axios.post('https://asac-orders-system.onrender.com/send-order', data);
-        console.log('Order sent successfully');
-      } catch (error) {
-        console.log('Error sending order:', error);
+    socketRef.current = socket;
+  
+    const handleOrderReceived = (data) => {
+      if (data && data.msg) {
+        setOrderMessage((prevOrderMessages) => [...prevOrderMessages, data.msg]);
+        setNotificationCount((prevCount) => prevCount + 1);
+        setNotifications((prevNotifications) => [...prevNotifications, data.msg]);
       }
     };
+  
+    const handleQueuedNotifications = (queuedNotifications) => {
+      console.log('Received queued notifications:', queuedNotifications);
+      queuedNotifications.forEach((notification) => {
+        console.log('Missed notification:', notification);
+        setNotificationCount((prevCount) => prevCount + 1);
+        setNotifications((prevNotifications) => [...prevNotifications, notification]);
+      });
+    };
+  
+    const handleNotificationReceived = (notification) => {
+      console.log('Received notification:', notification);
+      setNotificationCount((prevCount) => prevCount + 1);
+      setNotifications((prevNotifications) => [...prevNotifications, notification]);
+    };
+  
+    const handleDisconnect = () => {
+      console.log('Disconnected from the server');
+    };
+  
+    socketRef.current.on('order', handleOrderReceived);
+    socketRef.current.on('queuedNotifications', handleQueuedNotifications);
+    socketRef.current.on('notification', handleNotificationReceived);
+    socketRef.current.on('disconnect', handleDisconnect);
+  
+    return () => {
+      // Clean up the event listeners when the component unmounts
+      socketRef.current.off('order', handleOrderReceived);
+      socketRef.current.off('queuedNotifications', handleQueuedNotifications);
+      socketRef.current.off('notification', handleNotificationReceived);
+      socketRef.current.off('disconnect', handleDisconnect);
+    };
+  }, []);
 
-// Listen for the 'queuedNotifications' event
-// socket.on('queuedNotifications', (notifications) => {
-//   console.log('Received queued notifications:', notifications);
-//   // Display the missed messages to the user
-//   notifications.forEach((notification) => {
-//     console.log('Missed notification:', notification.msg);
-//     // Add your logic here to display the missed messages to the user
-//   });
-// });
-
-// // Optional: Listen for other events from the server
-// socket.on('notification', (notification) => {
-//   console.log('Received notification:', notification);
-// });
-
-// // Optional: Handle disconnection
-// socket.on('disconnect', () => {
-//   console.log('Disconnected from the server');
-// });
-
- 
-    async function getMenu(){
-     await axios.get('https://asac-orders-system.onrender.com/menu').then((result)=>{
-      setCookie('menu',result.data[0].name)
-      // console.log(result.data[0].name);
-     })
+  const handleOrderSend = async (message) => {
+    try {
+      await axios.post('http://localhost:3001/send-order', { msg: message });
+      console.log('Order sent successfully');
+    } catch (error) {
+      console.log('Error sending order:', error);
     }
+  };
+
+  async function getMenu() {
+    await axios.get('http://localhost:3001/menu').then((result) => {
+      setCookie('menu', result.data[0].name);
+      // console.log(result.data[0].name);
+    });
+  }
+
   const handleSignout = () => {
     setCookie('token', '', { path: '/' });
     setCookie('user', '', { path: '/' });
     navigate('/');
   };
-  const handleSetMenu = async ()=>{
-    let name;
-    if(cookies.menu==='arab'){
-      name ='yaman'
-    }else{
-      name='arab'
-    }
-    await axios.put('https://asac-orders-system.onrender.com/menu',{name})
-    .then(()=>{
-      getMenu()
 
-    })
-  }
+  const handleSetMenu = async () => {
+    let name;
+    if (cookies.menu === 'arab') {
+      name = 'yaman';
+    } else {
+      name = 'arab';
+    }
+    await axios.put('http://localhost:3001/menu', { name }).then(() => {
+      getMenu();
+    });
+  };
+
   const handleClearAllOrders = async () => {
     try {
-      const response = await fetch('https://asac-orders-system.onrender.com/orders/clear/all', {
+      const response = await fetch('http://localhost:3001/orders/clear/all', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -90,18 +108,17 @@ const Home = () => {
 
       if (response.ok) {
         Swal.fire({
-            icon: 'success',
-            title: 'Orders Cleared',
-            text: 'successfully!',
-          });
-      
+          icon: 'success',
+          title: 'Orders Cleared',
+          text: 'successfully!',
+        });
+
         navigate('/place-order');
       } else {
         Swal.fire({
-            icon: 'error',
-            title: 'not Allowed bro',
-            
-          });
+          icon: 'error',
+          title: 'not Allowed bro',
+        });
         navigate('/');
       }
     } catch (error) {
@@ -109,13 +126,30 @@ const Home = () => {
     }
   };
 
+  const handleNotificationIconClick = () => {
+    // Perform actions when the notification icon is clicked
+    // For example, showing a notification modal or dropdown
+    setNotificationCount(0); // Clear the notification count
+  };
+
   return (
     <div className="home-container">
       <h5 className="home-heading">ASAC Irbid Team Orders</h5>
- {/* <button onClick={handleOrderSend}>Send Order</button> */}
-      <nav className='main-nav'>
+      {cookies.user && cookies.user.email === 'mhmd.shrydh1996@gmail.com' && (
+        <>
+          <input
+            type="text"
+            value={orderMessage}
+            onChange={(e) => setOrderMessage(e.target.value)}
+            placeholder="Enter your message"
+          />
+          <button onClick={() => handleOrderSend(orderMessage)}>Send Order</button>
+        </>
+      )}
+
+      <nav className="main-nav">
         <ul className="nav-links">
-          {(cookies.token === '' || cookies.token === undefined )&& (
+          {(!cookies.token || !cookies.token.email) && (
             <li>
               <button className="nav-link-button">
                 <Link to="/place-order">Place Order </Link>
@@ -123,33 +157,35 @@ const Home = () => {
             </li>
           )}
 
-          {cookies.token !== '' && cookies.token !== undefined &&(
-            <div id='margin-buttons'>
+          {cookies.token && cookies.token.email && cookies.user.email !== 'mhmd.shrydh1996@gmail.com' && (
+            <div id="margin-buttons">
               <li>
-              <button className="nav-link-button">
+                <button className="nav-link-button">
                   <Link to="/place-order">Place Order </Link>
                 </button>
-             {/* {cookies.user.email === 'mhmd.shrydh1996@gmail.com' ? <button className="nav-link-button">
-                  <Link to="/place-order">Place Order </Link>
-                </button> : <><h3 style={{'color':'white'}}>Sorry We don't Accept new Orders for Today 🛎️👋</h3></>}   */}
               </li>
               <li>
-              {cookies.user.email === 'mhmd.shrydh1996@gmail.com' &&(<><button className="nav-link-button" onClick={handleClearAllOrders}>
-                  Clear All Orders
-                </button>
-                <button className="nav-link-button" onClick={handleSetMenu}>
-                  Set Menu
-                </button></>)}
-
-                
+                {cookies.user.email === 'mhmd.shrydh1996@gmail.com' && (
+                  <>
+                    <button className="nav-link-button" onClick={handleClearAllOrders}>
+                      Clear All Orders
+                    </button>
+                    <button className="nav-link-button" onClick={handleSetMenu}>
+                      Set Menu
+                    </button>
+                  </>
+                )}
               </li>
-<SendCalculations/>
-
+              <SendCalculations />
             </div>
           )}
         </ul>
-       
       </nav>
+
+      {cookies.user && cookies.user.email !== 'mhmd.shrydh1996@gmail.com' && (
+        <NotificationIcon count={notificationCount} notifications={notifications} onClick={handleNotificationIconClick} />
+      )}
+
       <Orders />
     </div>
   );
