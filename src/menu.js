@@ -94,18 +94,18 @@ export const menu = [
 //   { name: 'نوتيلا', price: '0.75' }
 // ];
 
-  // export const additions = [
-  //   { name: 'جبنه ماكينه', price: '0.50' },
-  //   { name: 'علبة مايونيز', price: '0.50' },
-  //   { name: 'علبة مخلل', price: '0.50' },
-  //   { name: 'سلطة كول سلو', price: '0.35' },
-  //   { name: 'علبة بطاطا', price: '0.75' }
-  // ];
   export const additions = [
-    { name: ' اضافة اطراف جبنه ', price: '1.00' },
-   
-    { name: 'فرايز بطاطا', price: '1.00' }
+    { name: 'جبنه ماكينه', price: '0.50' },
+    { name: 'علبة مايونيز', price: '0.50' },
+    { name: 'علبة مخلل', price: '0.50' },
+    { name: 'سلطة كول سلو', price: '0.35' },
+    { name: 'علبة بطاطا', price: '0.75' }
   ];
+  // export const additions = [
+  //   { name: ' اضافة اطراف جبنه ', price: '1.00' },
+   
+  //   { name: 'فرايز بطاطا', price: '1.00' }
+  // ];
   // export const drinks = [
   //   { name: 'بيبسي عادي', price: '0.35' },
   //   { name: 'بيبسي دايت', price: '0.35' },
