@@ -271,7 +271,7 @@ const Orders = () => {
     }
 
     // const closestIncrement = incrementValues[incrementIndex];
-    const remainingUnits = 2.5 - (incrementIndex * totalNumOrders);
+    const remainingUnits = 2.0 - (incrementIndex * totalNumOrders);
 
     // unitPrice = remainingUnits / totalNumOrders;
     // remainingPrice = (remainingUnits * totalOrderPrice) / totalNumOrders;
@@ -334,7 +334,7 @@ const Orders = () => {
                     Total Order Price:
                   </td>
                   <td colSpan="2" className="total-value">
-                    {(totalOrderPrice+2.5).toFixed(2)} JD
+                    {(totalOrderPrice+2.0).toFixed(2)} JD
                   </td>
                 </tr>
                 {/* <tr>
